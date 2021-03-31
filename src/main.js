@@ -11,7 +11,7 @@ document.onload = () => {
 function init() {
 
 
-    window.requestAnimationFrame(mainloop)
+    window.requestAnimationFrame(mainloop);
 }
 
 function mainloop() {

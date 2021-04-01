@@ -6,6 +6,10 @@ class AssetLoader {
         this.assetDir = assetDir;
     }
 
+    getAsset(name) {
+        return this.assets[name];
+    }
+
 }
 
 export { AssetLoader };

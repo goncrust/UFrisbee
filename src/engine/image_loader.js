@@ -15,6 +15,6 @@ class ImageLoader extends AssetLoader {
 let iLoader = new ImageLoader("../../assets");
 
 // images
-iLoader.load("testImage", "test.png");
+iLoader.load("field", "field.png");
 
 export { iLoader }

@@ -22,7 +22,7 @@ function mainloop() {
 
 // render graphics
 function render() {
-    ctx.drawImage(iLoader.getAsset("testImage"), 0, 0);
+    ctx.drawImage(iLoader.getAsset("field"), 0, 0, 800, 600);
 }
 
 // calculate logic

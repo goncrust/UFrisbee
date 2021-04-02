@@ -2,7 +2,7 @@ let fps = 0;
 let lct;
 let delta;
 
-function display_fps(ctx) {
+function display_fps(ctx, print) {
 
     if (lct == undefined || lct == null) {
         lct = Date.now();
@@ -14,6 +14,10 @@ function display_fps(ctx) {
 
     ctx.font = "15px Arial";
     ctx.fillText(fps, 0, 13);
+
+    if (print) {
+        console.log("FPS: " + fps);
+    }
 
     lct = Date.now();
 }

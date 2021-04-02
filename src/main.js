@@ -1,14 +1,20 @@
 import { iLoader } from "./engine/image_loader.js";
-import { vLoader } from "./engine/video_loader.js";
 import { display_fps } from "./engine/engine.js";
+import { Menu } from "./engine/menu/menu.js";
 
-let canvas = document.getElementById("display");
-let ctx = canvas.getContext("2d");
+let canvas;
+let ctx;
+let menu;
 
 document.onload = init();
 
 // initial function
 function init() {
+
+    canvas = document.getElementById("display");
+    ctx = canvas.getContext("2d");
+
+    menu = new Menu(ctx);
 
     window.requestAnimationFrame(mainloop);
 }
@@ -24,26 +30,19 @@ function mainloop() {
 
 // render graphics
 function render() {
-
     // clear screen
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    //if (vLoader.getAsset("testVideo").paused || vLoader.getAsset("testVideo").ended) {
-    //    vLoader.getAsset("testVideo").play();
-    //}
-
-    //ctx.drawImage(vLoader.getAsset("testVideo"), 0, 0, 800, 600);
-
+    // render scenario
+    //menu.render();
     ctx.drawImage(iLoader.getAsset("field"), 0, 0, 800, 600);
 
-    display_fps(ctx);
+    // fps count
+    display_fps(ctx, false);
 }
 
 
 // calculate logic
 function logic() {
-
-
-
 
 }

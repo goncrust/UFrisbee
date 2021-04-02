@@ -24,11 +24,11 @@ function mainloop() {
 // render graphics
 function render() {
 
-    if (iLoader.getAsset("field").paused || iLoader.getAsset("field").ended) {
-        iLoader.getAsset("field").play();
+    if (vLoader.getAsset("testVideo").paused || vLoader.getAsset("testVideo").ended) {
+        vLoader.getAsset("testVideo").play();
     }
 
-    ctx.drawImage(iLoader.getAsset("field"), 0, 0, 800, 600);
+    ctx.drawImage(vLoader.getAsset("testVideo"), 0, 0, 800, 600);
 
     //ctx.drawImage(iLoader.getAsset("field"), 0, 0, 800, 600);
 }

@@ -24,13 +24,13 @@ function mainloop() {
 // render graphics
 function render() {
 
-    if (vLoader.assets["testevideo"].paused || vLoader.assets["testevideo"].ended) {
-        vLoader.assets["testevideo"].play();
+    if (iLoader.getAsset("field").paused || iLoader.getAsset("field").ended) {
+        iLoader.getAsset("field").play();
     }
 
-    ctx.drawImage(vLoader.assets["testevideo"], 0, 0, 800, 600);
-    // ctx.drawImage(iLoader.assets["testImage"], 0, 0);
+    ctx.drawImage(iLoader.getAsset("field"), 0, 0, 800, 600);
 
+    //ctx.drawImage(iLoader.getAsset("field"), 0, 0, 800, 600);
 }
 
 // calculate logic

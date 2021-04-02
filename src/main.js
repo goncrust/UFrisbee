@@ -24,8 +24,12 @@ function mainloop() {
 // render graphics
 function render() {
 
-    ctx.drawImage(vLoader.assets["testevideo"], 0, 0);
-  //  ctx.drawImage(iLoader.assets["testImage"], 0, 0);
+    if (vLoader.assets["testevideo"].paused || vLoader.assets["testevideo"].ended) {
+        vLoader.assets["testevideo"].play();
+    }
+
+    ctx.drawImage(vLoader.assets["testevideo"], 0, 0, 800, 600);
+    // ctx.drawImage(iLoader.assets["testImage"], 0, 0);
 
 }
 

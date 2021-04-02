@@ -5,16 +5,14 @@ class VideoLoader extends AssetLoader {
     constructor(assetDir) {
         super(assetDir);
     }
-    
-    
+
+
     load(name, file) {
         this.assets[name] = document.createElement("video");
+        this.assets[name].muted = true;
         this.assets[name].src = this.assetDir + "/" + file;
-        this.assets[name].play();
-        //erro ^|
+        this.assets[name].pause();
     }
-
-
 
 }
 

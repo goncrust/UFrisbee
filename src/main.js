@@ -25,13 +25,16 @@ function mainloop() {
 // render graphics
 function render() {
 
+    // clear screen
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     //if (vLoader.getAsset("testVideo").paused || vLoader.getAsset("testVideo").ended) {
-        //vLoader.getAsset("testVideo").play();
+    //    vLoader.getAsset("testVideo").play();
     //}
 
     //ctx.drawImage(vLoader.getAsset("testVideo"), 0, 0, 800, 600);
 
-    //ctx.drawImage(iLoader.getAsset("field"), 0, 0, 800, 600);
+    ctx.drawImage(iLoader.getAsset("field"), 0, 0, 800, 600);
 
     display_fps(ctx);
 }

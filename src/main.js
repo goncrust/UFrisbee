@@ -41,8 +41,8 @@ function render() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // render scenario
-    //menu.render();
-    ctx.drawImage(iLoader.getAsset("field"), 0, 0, 800, 600);
+    menu.render();
+    //ctx.drawImage(iLoader.getAsset("field"), 0, 0, 800, 600);
 
     // fps count
     display_fps(ctx, false);

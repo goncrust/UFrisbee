@@ -16,5 +16,6 @@ let iLoader = new ImageLoader("../../assets");
 
 // images
 iLoader.load("field", "field.png");
+iLoader.load("options", "optionsbutton.png")
 
 export { iLoader }

@@ -8,6 +8,9 @@ let ctx;
 let menu;
 let event_listener;
 
+// clicks
+let last_clicked;
+
 document.onload = init();
 
 // initial function
@@ -49,4 +52,13 @@ function render() {
 // calculate logic
 function logic() {
 
+    menu.logic(last_clicked);
+
 }
+
+// last_clicked
+function update_clicked(coords) {
+    last_clicked = coords;
+}
+
+export { update_clicked };

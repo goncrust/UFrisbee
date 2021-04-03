@@ -15,7 +15,7 @@ class Menu {
         this.ctx.drawImage(vLoader.getAsset("testVideo"), 0, 0, 800, 600);
     }
 
-    logic() {
+    logic(last_clicked) {
 
     }
 

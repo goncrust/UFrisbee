@@ -13,6 +13,7 @@ function display_fps(ctx, print) {
     fps = Math.round(1 / delta);
 
     ctx.font = "15px Arial";
+    ctx.fillStyle = "white";
     ctx.fillText(fps, 0, 13);
 
     if (print) {

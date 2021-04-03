@@ -16,5 +16,7 @@ let iLoader = new ImageLoader("../../assets");
 
 // images
 iLoader.load("field", "field.png");
+iLoader.load("options", "options_button.png")
+iLoader.load("arrow_left", "arrow_left.png")
 
 export { iLoader }

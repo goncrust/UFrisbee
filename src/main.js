@@ -1,10 +1,12 @@
 import { iLoader } from "./engine/image_loader.js";
 import { display_fps } from "./engine/engine.js";
 import { Menu } from "./engine/menu/menu.js";
+import { EventListener } from "./engine/event_listener.js";
 
 let canvas;
 let ctx;
 let menu;
+let event_listener;
 
 document.onload = init();
 
@@ -15,6 +17,8 @@ function init() {
     ctx = canvas.getContext("2d");
 
     menu = new Menu(ctx);
+
+    event_listener = new EventListener(canvas);
 
     window.requestAnimationFrame(mainloop);
 }

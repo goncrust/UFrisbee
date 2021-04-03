@@ -2,8 +2,9 @@ import { vLoader } from "../video_loader.js";
 
 class Menu {
 
-    constructor(ctx) {
+    constructor(ctx, event_listener) {
         this.ctx = ctx;
+        this.event_listener = event_listener;
     }
 
     render() {

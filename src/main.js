@@ -3,12 +3,14 @@ import { display_fps } from "./engine/engine.js";
 import { Menu } from "./engine/menu/menu.js";
 import { EventListener } from "./engine/event_listener.js";
 import { scenarios, Scenario } from "./engine/scenario.js";
+import { Game } from "./game/game.js";
 
 let canvas;
 let ctx;
 let menu;
 let event_listener;
 let scenario;
+let game;
 
 // clicks
 let last_clicked;
@@ -24,6 +26,7 @@ function init() {
     menu = new Menu(ctx);
     event_listener = new EventListener(canvas);
     scenario = new Scenario(scenarios.menu);
+    game = new Game(ctx);
 
     window.requestAnimationFrame(mainloop);
 }
@@ -48,7 +51,7 @@ function render() {
             menu.render();
             break;
         case scenarios.game:
-            ctx.drawImage(iLoader.getAsset("field"), 0, 0, 800, 600);
+            game.render();
             break;
     }
 
@@ -63,6 +66,9 @@ function logic() {
     switch (scenario.getCurrent()) {
         case scenarios.menu:
             menu.logic(last_clicked);
+            break;
+        case scenarios.game:
+            game.logic();
             break;
     }
 

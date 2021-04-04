@@ -13,6 +13,10 @@ class Scenario {
         return this.current;
     }
 
+    setCurrent(scenario) {
+        this.current = scenario;
+    }
+
 }
 
 export { scenarios, Scenario };

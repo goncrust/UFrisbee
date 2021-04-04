@@ -1,11 +1,12 @@
 import { vLoader } from "../video_loader.js";
 import { iLoader } from "../image_loader.js";
+import { scenarios } from "../scenario.js";
 
 class Menu {
 
-    constructor(ctx, event_listener) {
+    constructor(ctx, scenario) {
         this.ctx = ctx;
-        this.event_listener = event_listener;
+        this.scenario = scenario;
 
         // 0 -> first menu; 1 -> second menu
         this.menu = 0;
@@ -28,25 +29,28 @@ class Menu {
         }
     }
 
-    logic(last_clicked) {
-        if (last_clicked != undefined) {
+    logic(last_clicked, clicked) {
+        if (clicked) {
+            if (last_clicked != undefined) {
 
-            if (this.menu == 0) {
-                if (last_clicked[0] > 550 && last_clicked[0] < 750 && last_clicked[1] > 485 && last_clicked[1] < 535) {
-                    this.menu = 1;
+                if (this.menu == 0) {
+                    if (last_clicked[0] > 550 && last_clicked[0] < 750 && last_clicked[1] > 485 && last_clicked[1] < 535) {
+                        this.menu = 1;
+                    }
+                    else if (last_clicked[0] > 50 && last_clicked[0] < 250 && last_clicked[1] > 485 && last_clicked[1] < 535) {
+                        this.scenario.setCurrent(scenarios.game);
+                    }
+                    else if (last_clicked[0] > 300 && last_clicked[0] < 500 && last_clicked[1] > 485 && last_clicked[1] < 535) {
+                        this.scenario.setCurrent(scenarios.game);
+                    }
+
+                } else if (this.menu == 1) {
+                    if (last_clicked[0] > 20 && last_clicked[0] < 120 && last_clicked[1] > 485 && last_clicked[1] < 585) {
+                        this.menu = 0;
+                    }
                 }
-                if (last_clicked[0] > 50 && last_clicked[0] < 250 && last_clicked[1] > 485 && last_clicked[1] < 535) {
-                    this.scenarios = 1;
-                }
-                if (last_clicked[0] > 300 && last_clicked[0] < 500 && last_clicked[1] > 485 && last_clicked[1] < 535) {
-                    this.scenarios = 1;
-                }
-            } else if (this.menu == 1) {
-                if (last_clicked[0] > 20 && last_clicked[0] < 120 && last_clicked[1] > 485 && last_clicked[1] < 585) {
-                    this.menu = 0;
-                }
+
             }
-
         }
     }
 

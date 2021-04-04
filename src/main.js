@@ -14,6 +14,7 @@ let game;
 
 // clicks
 let last_clicked;
+let clicked;
 
 document.onload = init();
 
@@ -23,10 +24,12 @@ function init() {
     canvas = document.getElementById("display");
     ctx = canvas.getContext("2d");
 
-    menu = new Menu(ctx);
     event_listener = new EventListener(canvas);
     scenario = new Scenario(scenarios.menu);
+    menu = new Menu(ctx, scenario);
     game = new Game(ctx);
+
+    clicked = false;
 
     window.requestAnimationFrame(mainloop);
 }
@@ -65,18 +68,20 @@ function logic() {
 
     switch (scenario.getCurrent()) {
         case scenarios.menu:
-            menu.logic(last_clicked);
+            menu.logic(last_clicked, clicked);
             break;
         case scenarios.game:
             game.logic();
             break;
     }
 
+    clicked = false;
 }
 
 // last_clicked
 function update_clicked(coords) {
     last_clicked = coords;
+    clicked = true;
 }
 
 export { update_clicked };

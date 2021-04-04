@@ -18,5 +18,7 @@ let iLoader = new ImageLoader("../../assets");
 iLoader.load("field", "field.png");
 iLoader.load("options", "options_button.png")
 iLoader.load("arrow_left", "arrow_left.png")
+iLoader.load("singleplayer", "singleplayer.png")
+iLoader.load("multiplayer", "multiplayer.png")
 
 export { iLoader }

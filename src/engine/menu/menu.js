@@ -19,7 +19,9 @@ class Menu {
         this.ctx.drawImage(vLoader.getAsset("testVideo"), 0, 0, 800, 600);
 
         if (this.menu == 0) {
-            this.ctx.drawImage(iLoader.getAsset("options"), 680, 485, 100, 100);
+            this.ctx.drawImage(iLoader.getAsset("options"), 550, 485, 200, 50);
+            this.ctx.drawImage(iLoader.getAsset("singleplayer"), 50, 485, 200, 50);
+            this.ctx.drawImage(iLoader.getAsset("multiplayer"), 300, 485, 200, 50);
         } else if (this.menu == 1) {
             this.ctx.drawImage(iLoader.getAsset("arrow_left"), 20, 485, 100, 100);
         }
@@ -29,8 +31,14 @@ class Menu {
         if (last_clicked != undefined) {
 
             if (this.menu == 0) {
-                if (last_clicked[0] > 680 && last_clicked[0] < 780 && last_clicked[1] > 485 && last_clicked[1] < 585) {
+                if (last_clicked[0] > 550 && last_clicked[0] < 750 && last_clicked[1] > 485 && last_clicked[1] < 535) {
                     this.menu = 1;
+                }
+                if (last_clicked[0] > 50 && last_clicked[0] < 250 && last_clicked[1] > 485 && last_clicked[1] < 535) {
+                    this.scenarios = 1;
+                }
+                if (last_clicked[0] > 300 && last_clicked[0] < 500 && last_clicked[1] > 485 && last_clicked[1] < 535) {
+                    this.scenarios = 1;
                 }
             } else if (this.menu == 1) {
                 if (last_clicked[0] > 20 && last_clicked[0] < 120 && last_clicked[1] > 485 && last_clicked[1] < 585) {

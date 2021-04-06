@@ -1,6 +1,7 @@
 const scenarios = {
     menu: 0,
-    game: 1
+    game: 1,
+    pause: 2
 };
 
 class Scenario {

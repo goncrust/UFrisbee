@@ -1,4 +1,3 @@
-import { iLoader } from "./engine/image_loader.js";
 import { display_fps } from "./engine/engine.js";
 import { Menu } from "./engine/menu/menu.js";
 import { EventListener } from "./engine/event_listener.js";
@@ -16,6 +15,9 @@ let game;
 let last_clicked;
 let clicked;
 
+let last_b_clicked;
+let clicked_b;
+
 document.onload = init();
 
 // initial function
@@ -27,9 +29,10 @@ function init() {
     event_listener = new EventListener(canvas);
     scenario = new Scenario(scenarios.menu);
     menu = new Menu(ctx, scenario);
-    game = new Game(ctx);
+    game = new Game(ctx, scenario);
 
     clicked = false;
+    clicked_b = false;
 
     window.requestAnimationFrame(mainloop);
 }
@@ -51,10 +54,13 @@ function render() {
     // render scenario
     switch (scenario.getCurrent()) {
         case scenarios.menu:
-            menu.render();
+            menu.render(false);
             break;
         case scenarios.game:
             game.render();
+            break;
+        case scenarios.pause:
+            menu.render(true);
             break;
     }
 
@@ -68,14 +74,18 @@ function logic() {
 
     switch (scenario.getCurrent()) {
         case scenarios.menu:
-            menu.logic(last_clicked, clicked);
+            menu.logic(last_clicked, clicked, last_b_clicked, clicked_b, false);
             break;
         case scenarios.game:
-            game.logic();
+            game.logic(last_clicked, clicked, last_b_clicked, clicked_b);
+            break;
+        case scenarios.pause:
+            menu.logic(last_clicked, clicked, last_b_clicked, clicked_b, true);
             break;
     }
 
     clicked = false;
+    clicked_b = false;
 }
 
 // last_clicked
@@ -84,4 +94,10 @@ function update_clicked(coords) {
     clicked = true;
 }
 
-export { update_clicked };
+// last_b_clicked
+function update_b_clicked(button) {
+    last_b_clicked = button;
+    clicked_b = true;
+}
+
+export { update_clicked, update_b_clicked };

@@ -1,4 +1,5 @@
 import { Player } from "../entities/player.js";
+import { distance } from "../util/util.js";
 
 class Teams {
 
@@ -9,14 +10,36 @@ class Teams {
         this.team_red = new Array(team_player_count);
 
         for (let i = 0; i < team_player_count; i++) {
-            let blue_x = Math.floor(Math.random() * (bounds_blue[1][0] - bounds_blue[0][0] + 1)) + bounds_blue[0][0];
-            let blue_y = Math.floor(Math.random() * (bounds_blue[1][1] - bounds_blue[0][1] + 1)) + bounds_blue[0][1];
+            let done = false;
 
-            let red_x = Math.floor(Math.random() * (bounds_red[1][0] - bounds_red[0][0] + 1)) + bounds_red[0][0];
-            let red_y = Math.floor(Math.random() * (bounds_red[1][1] - bounds_red[0][1] + 1)) + bounds_red[0][1];
+            let blue_x;
+            let blue_y;
 
-            console.log("blue: " + blue_x + ", " + blue_y);
-            console.log("red: " + red_x + ", " + red_y);
+            let red_x;
+            let red_y;
+
+            while (!done) {
+                blue_x = Math.floor(Math.random() * (bounds_blue[1][0] - bounds_blue[0][0] + 1)) + bounds_blue[0][0];
+                blue_y = Math.floor(Math.random() * (bounds_blue[1][1] - bounds_blue[0][1] + 1)) + bounds_blue[0][1];
+
+                red_x = Math.floor(Math.random() * (bounds_red[1][0] - bounds_red[0][0] + 1)) + bounds_red[0][0];
+                red_y = Math.floor(Math.random() * (bounds_red[1][1] - bounds_red[0][1] + 1)) + bounds_red[0][1];
+
+                done = true;
+
+                for (let y = 0; y < i; y++) {
+                    if (distance([blue_x, blue_y], this.team_blue[y].getCoords()) < 21) {
+                        done = false;
+                    }
+
+                    if (distance([red_x, red_y], this.team_red[y].getCoords()) < 21) {
+                        done = false;
+                    }
+                }
+            }
+
+            // console.log("blue: " + blue_x + ", " + blue_y);
+            // console.log("red: " + red_x + ", " + red_y);
 
             this.team_blue[i] = new Player(blue_x, blue_y, true, "#0000ff", ctx);
             this.team_red[i] = new Player(red_x, red_y, true, "#ff0000", ctx);

@@ -11,12 +11,8 @@ class Entity {
         this.visible = visibility;
     }
 
-    getX() {
-        return this.x;
-    }
-
-    getY() {
-        return this.y;
+    getCoords() {
+        return [this.x, this.y];
     }
 
     move(x, y) {

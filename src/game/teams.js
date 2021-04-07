@@ -28,11 +28,11 @@ class Teams {
                 done = true;
 
                 for (let y = 0; y < i; y++) {
-                    if (distance([blue_x, blue_y], this.team_blue[y].getCoords()) < 21) {
+                    if (distance([blue_x, blue_y], this.team_blue[y].getCoords()) < Player.player_radius * 2 + 1) {
                         done = false;
                     }
 
-                    if (distance([red_x, red_y], this.team_red[y].getCoords()) < 21) {
+                    if (distance([red_x, red_y], this.team_red[y].getCoords()) < Player.player_radius * 2 + 1) {
                         done = false;
                     }
                 }

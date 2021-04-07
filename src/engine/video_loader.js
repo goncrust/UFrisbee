@@ -14,7 +14,7 @@ class VideoLoader extends AssetLoader {
     }
 }
 
-let vLoader = new VideoLoader("../../assets");
+let vLoader = new VideoLoader("assets");
 
 // video
 vLoader.load("testVideo", "vidtest.mp4");

@@ -41,8 +41,8 @@ class Teams {
             // console.log("blue: " + blue_x + ", " + blue_y);
             // console.log("red: " + red_x + ", " + red_y);
 
-            this.team_blue[i] = new Player(blue_x, blue_y, true, "#0000ff", ctx);
-            this.team_red[i] = new Player(red_x, red_y, true, "#ff0000", ctx);
+            this.team_blue[i] = new Player(blue_x, blue_y, true, "#0000ff", "#ffffff", ctx);
+            this.team_red[i] = new Player(red_x, red_y, true, "#ff0000", "#ffffff", ctx);
         }
     }
 

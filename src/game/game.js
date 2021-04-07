@@ -2,6 +2,7 @@ import { vLoader } from "../engine/video_loader.js";
 import { iLoader } from "../engine/image_loader.js";
 import { scenarios } from "../engine/scenario.js";
 import { Teams } from "./teams.js";
+import { in_radius } from "../util/util.js";
 
 class Game {
 
@@ -29,6 +30,17 @@ class Game {
     logic(last_clicked, clicked, last_b_clicked, clicked_b) {
         // handle mouse clicks
         if (clicked) {
+
+            for (let i = 0; i < this.teams.size; i++) {
+                if (in_radius(this.teams.team_blue[i].getCoords(), 10, last_clicked)) {
+
+                    for (let y = 0; y < this.teams.size; y++) {
+                        this.teams.team_blue[y].selected = false;
+                    }
+
+                    this.teams.team_blue[i].selected = true;
+                }
+            }
 
         }
 

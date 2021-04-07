@@ -6,4 +6,13 @@ function distance(coords1, coords2) {
     return result;
 }
 
-export { distance };
+// (x - xc)^2 + (y - yc)^2 = r^2
+function in_radius(coords_t, radius, coords_p) {
+    if ((Math.pow(coords_p[0] - coords_t[0], 2) + Math.pow(coords_p[1] - coords_t[1], 2)) <= Math.pow(radius, 2)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+export { distance, in_radius };

@@ -15,4 +15,13 @@ function in_radius(coords_t, radius, coords_p) {
     }
 }
 
-export { distance, in_radius };
+function in_radius_complex(coords_t, radius_start, radius_end, coords_p) {
+    let left_equation = (Math.pow(coords_p[0] - coords_t[0], 2) + Math.pow(coords_p[1] - coords_t[1], 2));
+    if (left_equation > Math.pow(radius_start, 2) && left_equation <= Math.pow(radius_end, 2)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+export { distance, in_radius, in_radius_complex };

@@ -3,7 +3,7 @@ import { iLoader } from "../engine/image_loader.js";
 import { scenarios } from "../engine/scenario.js";
 import { Player } from "../entities/player.js";
 import { Teams } from "./teams.js";
-import { in_radius } from "../util/util.js";
+import { in_radius, in_radius_complex } from "../util/util.js";
 
 class Game {
 
@@ -53,7 +53,7 @@ class Game {
                 }
 
                 // for red team
-                // working....
+                // working...
             }
 
             // move player
@@ -63,12 +63,14 @@ class Game {
 
                     // for blue team
                     if (this.teams.team_blue[i].selected) {
-                        if (in_radius(this.teams.team_blue[i].getCoords(), Player.move_radius, last_clicked)) {
+                        if (in_radius_complex(this.teams.team_blue[i].getCoords(), Player.player_radius, Player.move_radius, last_clicked)) {
                             this.teams.team_blue[i].move(last_clicked[0], last_clicked[1]);
                             this.teams.team_blue[i].selected = false;
                         }
                     }
 
+                    // for red team
+                    // working...
                 }
 
             }

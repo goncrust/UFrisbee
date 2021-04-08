@@ -1,4 +1,5 @@
 import { Entity } from "./entity.js";
+import { radius_colision_with_field } from "../util/util.js";
 
 class Player extends Entity {
 
@@ -32,16 +33,49 @@ class Player extends Entity {
 
             // selected player move radius
             if (this.selected) {
+                let result = radius_colision_with_field(this.getCoords(), Player.move_radius, 66, 733, 121, 478);
+
                 this.ctx.beginPath();
 
-                this.ctx.arc(this.x, this.y, Player.move_radius, 0, 2 * Math.PI, false);
+                if (result[0] != undefined && result[1] != undefined && result[2] == undefined && result[3] == undefined) {
+                    this.ctx.arc(this.x, this.y, Player.move_radius, result[0], result[1], true);
 
-                this.ctx.strokeStyle = "#000000";
-                this.ctx.lineWidth = 3;
+                    this.ctx.strokeStyle = "#000000";
+                    this.ctx.lineWidth = 3;
 
-                this.ctx.stroke();
+                    this.ctx.stroke();
 
-                this.ctx.closePath();
+                    this.ctx.closePath();
+                } else if (result[0] != undefined && result[1] != undefined && result[2] != undefined && result[3] != undefined) {
+                    this.ctx.arc(this.x, this.y, Player.move_radius, result[0], result[1], true);
+
+                    this.ctx.strokeStyle = "#000000";
+                    this.ctx.lineWidth = 3;
+
+                    this.ctx.stroke();
+
+                    this.ctx.closePath();
+
+                    this.ctx.beginPath();
+
+                    this.ctx.arc(this.x, this.y, Player.move_radius, result[2], result[3], true);
+
+                    this.ctx.strokeStyle = "#000000";
+                    this.ctx.lineWidth = 3;
+
+                    this.ctx.stroke();
+
+                    this.ctx.closePath();
+                } else {
+                    this.ctx.arc(this.x, this.y, Player.move_radius, 0, 2 * Math.PI, true);
+
+                    this.ctx.strokeStyle = "#000000";
+                    this.ctx.lineWidth = 3;
+
+                    this.ctx.stroke();
+
+                    this.ctx.closePath();
+                }
             }
         }
     }

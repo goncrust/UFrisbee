@@ -12,11 +12,15 @@ class ImageLoader extends AssetLoader {
     }
 }
 
-let iLoader = new ImageLoader("../../assets");
+//let iLoader = new ImageLoader("../../assets");
+let iLoader = new ImageLoader("https://goncrust.github.io/UFrisbee/assets");
 
 // images
 iLoader.load("field", "field.png");
-iLoader.load("options", "options_button.png")
-iLoader.load("arrow_left", "arrow_left.png")
+iLoader.load("options", "options_button.png");
+iLoader.load("arrow_left", "arrow_left.png");
+iLoader.load("singleplayer", "singleplayer.png");
+iLoader.load("multiplayer", "multiplayer.png");
+iLoader.load("logo", "logo.png")
 
 export { iLoader }

@@ -1,6 +1,7 @@
 const scenarios = {
     menu: 0,
-    game: 1
+    game: 1,
+    pause: 2
 };
 
 class Scenario {
@@ -11,6 +12,10 @@ class Scenario {
 
     getCurrent() {
         return this.current;
+    }
+
+    setCurrent(scenario) {
+        this.current = scenario;
     }
 
 }

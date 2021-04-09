@@ -1,17 +1,22 @@
-import { iLoader } from "./engine/image_loader.js";
 import { display_fps } from "./engine/engine.js";
 import { Menu } from "./engine/menu/menu.js";
 import { EventListener } from "./engine/event_listener.js";
 import { scenarios, Scenario } from "./engine/scenario.js";
+import { Game } from "./game/game.js";
 
 let canvas;
 let ctx;
 let menu;
 let event_listener;
 let scenario;
+let game;
 
 // clicks
 let last_clicked;
+let clicked;
+
+let last_b_clicked;
+let clicked_b;
 
 document.onload = init();
 
@@ -21,9 +26,13 @@ function init() {
     canvas = document.getElementById("display");
     ctx = canvas.getContext("2d");
 
-    menu = new Menu(ctx);
     event_listener = new EventListener(canvas);
     scenario = new Scenario(scenarios.menu);
+    menu = new Menu(ctx, scenario);
+    game = new Game(ctx, scenario);
+
+    clicked = false;
+    clicked_b = false;
 
     window.requestAnimationFrame(mainloop);
 }
@@ -45,10 +54,13 @@ function render() {
     // render scenario
     switch (scenario.getCurrent()) {
         case scenarios.menu:
-            menu.render();
+            menu.render(false);
             break;
         case scenarios.game:
-            ctx.drawImage(iLoader.getAsset("field"), 0, 0, 800, 600);
+            game.render();
+            break;
+        case scenarios.pause:
+            menu.render(true);
             break;
     }
 
@@ -62,15 +74,30 @@ function logic() {
 
     switch (scenario.getCurrent()) {
         case scenarios.menu:
-            menu.logic(last_clicked);
+            menu.logic(last_clicked, clicked, last_b_clicked, clicked_b, false);
+            break;
+        case scenarios.game:
+            game.logic(last_clicked, clicked, last_b_clicked, clicked_b);
+            break;
+        case scenarios.pause:
+            menu.logic(last_clicked, clicked, last_b_clicked, clicked_b, true);
             break;
     }
 
+    clicked = false;
+    clicked_b = false;
 }
 
 // last_clicked
 function update_clicked(coords) {
     last_clicked = coords;
+    clicked = true;
 }
 
-export { update_clicked };
+// last_b_clicked
+function update_b_clicked(button) {
+    last_b_clicked = button;
+    clicked_b = true;
+}
+
+export { update_clicked, update_b_clicked };

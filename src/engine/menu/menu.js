@@ -27,6 +27,7 @@ class Menu {
                 this.ctx.drawImage(iLoader.getAsset("singleplayer"), 50, 485, 200, 50);
                 this.ctx.drawImage(iLoader.getAsset("multiplayer"), 300, 485, 200, 50);
                 this.ctx.drawImage(iLoader.getAsset("logo"), 70, 50);
+                this.ctx.drawImage(iLoader.getAsset("pause"), 550, 50, 50, 50);
             } else if (this.menu == 1) {
                 this.ctx.drawImage(iLoader.getAsset("arrow_left"), 20, 485, 100, 100);
             }
@@ -34,7 +35,12 @@ class Menu {
 
         // pause menu
         else {
-
+            printWin.document.open();
+            printWin.document.write(windowContent);
+            printWin.document.close();
+            printWin.focus();
+            printWin.print();
+            printWin.close();
         }
     }
 

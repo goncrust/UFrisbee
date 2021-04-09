@@ -1,12 +1,20 @@
 
-// h = sqrt((x1-x0)^2 + (y1-y0)^2)
+/*
+Determine the distance between two points.
+
+h = sqrt((x1-x0)^2 + (y1-y0)^2)
+*/
 function distance(coords1, coords2) {
     let result = Math.sqrt(Math.pow(coords1[0] - coords2[0], 2) + Math.pow(coords1[1] - coords2[1], 2));
 
     return result;
 }
 
-// (x - xc)^2 + (y - yc)^2 = r^2
+/* 
+Verify if a point is inside a circumference.
+
+(x - xc)^2 + (y - yc)^2 = r^2
+*/
 function in_radius(coords_t, radius, coords_p) {
     if ((Math.pow(coords_p[0] - coords_t[0], 2) + Math.pow(coords_p[1] - coords_t[1], 2)) <= Math.pow(radius, 2)) {
         return true;
@@ -15,6 +23,11 @@ function in_radius(coords_t, radius, coords_p) {
     }
 }
 
+/*
+Verify if a point is in the space between 2 circumferences.
+
+(x - xc)^2 + (y - yc)^2 = r^2
+*/
 function in_radius_complex(coords_t, radius_start, radius_end, coords_p) {
     let left_equation = (Math.pow(coords_p[0] - coords_t[0], 2) + Math.pow(coords_p[1] - coords_t[1], 2));
     if (left_equation > Math.pow(radius_start, 2) && left_equation <= Math.pow(radius_end, 2)) {
@@ -24,7 +37,11 @@ function in_radius_complex(coords_t, radius_start, radius_end, coords_p) {
     }
 }
 
-// x = (-b +- raiz(b^2 -4ac)) / 2a
+/*
+Second degree equation solver.
+
+x = (-b +- raiz(b^2 -4ac)) / 2a
+*/
 function second_degree_equation(a, b, c) {
     let delta = Math.pow(b, 2) - (4 * a * c);
 
@@ -37,12 +54,21 @@ function second_degree_equation(a, b, c) {
     }
 }
 
-/* (x - xc)^2 + (y - yc)^2 = r^2
+/* 
+Calculate the angles that a given circumference collides with the boundaries of a field.
+Different types of returns:
+[number, number, undefined, undefined] -> when the circumference colides with one equation (x = a or y = b) two times (one side of the field), 
+                                          or two different equations (x = a and y = b) one time (two sides of the field, a corner).
+[number, number, number, number] -> when the circumference colides with two different equations (x = a and y = b) two times,
+                                    the first two numbers are the angles for the small semicircumference and the last two are for the bigger one.
+[] -> no collision with boundaries of the field.
 
-x^2 - 2xcx + xc^2 + y^2 - 2ycy + yc^2 = r^2
-x^2 - 2xcx + xc^2 + y^2 - 2ycy + yc^2 - r^2 = 0
-y^2 - 2ycy + yc^2 + x^2 - 2xcx + xc^2 - r^2 = 0
-a     b    -> c
+The numbers are in counterclockwise order, so the arc() function must take the last argument as true if you use the angles in the order of the returned array.
+
+(x - xc)^2 + (y - yc)^2 = r^2
+<=> x^2 - 2xcx + xc^2 + y^2 - 2ycy + yc^2 - r^2 = 0
+<=> y^2 - 2ycy + yc^2 + x^2 - 2xcx + xc^2 - r^2 = 0
+    a     b      c->
 */
 function radius_colision_with_field(coords_t, radius, field_x_left, field_x_right, field_y_top, field_y_bot) {
 
@@ -203,10 +229,13 @@ function radius_colision_with_field(coords_t, radius, field_x_left, field_x_righ
         result_angles[1] = result_angles_right[1];
     }
 
-    console.log(result_angles);
     return result_angles;
 }
 
+/*
+Check if all arguments passed are not undefined.
+If an argument is an array it will iterate it and search for undefined values.
+*/
 function verify_all_not_undefined() {
     let successful = true;
 

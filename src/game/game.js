@@ -3,7 +3,7 @@ import { iLoader } from "../engine/image_loader.js";
 import { scenarios } from "../engine/scenario.js";
 import { Player } from "../entities/player.js";
 import { Teams } from "./teams.js";
-import { in_radius, in_radius_complex } from "../util/util.js";
+import { in_radius, in_radius_complex, radius_colision_with_field } from "../util/util.js";
 
 class Game {
 
@@ -66,6 +66,7 @@ class Game {
                         if (in_radius_complex(this.teams.team_blue[i].getCoords(), Player.player_radius, Player.move_radius, last_clicked)) {
                             this.teams.team_blue[i].move(last_clicked[0], last_clicked[1]);
                             this.teams.team_blue[i].selected = false;
+                            this.teams.team_blue[i].radius_colision_angles = radius_colision_with_field(this.teams.team_blue[i].getCoords(), Player.move_radius, 66, 733, 121, 478);
                         }
                     }
 

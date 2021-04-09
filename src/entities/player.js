@@ -12,6 +12,8 @@ class Player extends Entity {
         this.color_selected = color_selected;
 
         this.selected = false;
+
+        this.radius_colision_angles = radius_colision_with_field(this.getCoords(), Player.move_radius, 66, 733, 121, 478);
     }
 
     render() {
@@ -33,12 +35,10 @@ class Player extends Entity {
 
             // selected player move radius
             if (this.selected) {
-                let result = radius_colision_with_field(this.getCoords(), Player.move_radius, 66, 733, 121, 478);
-
                 this.ctx.beginPath();
 
-                if (result[0] != undefined && result[1] != undefined && result[2] == undefined && result[3] == undefined) {
-                    this.ctx.arc(this.x, this.y, Player.move_radius, result[0], result[1], true);
+                if (this.radius_colision_angles[0] != undefined && this.radius_colision_angles[1] != undefined && this.radius_colision_angles[2] == undefined && this.radius_colision_angles[3] == undefined) {
+                    this.ctx.arc(this.x, this.y, Player.move_radius, this.radius_colision_angles[0], this.radius_colision_angles[1], true);
 
                     this.ctx.strokeStyle = "#000000";
                     this.ctx.lineWidth = 3;
@@ -46,8 +46,8 @@ class Player extends Entity {
                     this.ctx.stroke();
 
                     this.ctx.closePath();
-                } else if (result[0] != undefined && result[1] != undefined && result[2] != undefined && result[3] != undefined) {
-                    this.ctx.arc(this.x, this.y, Player.move_radius, result[0], result[1], true);
+                } else if (this.radius_colision_angles[0] != undefined && this.radius_colision_angles[1] != undefined && this.radius_colision_angles[2] != undefined && this.radius_colision_angles[3] != undefined) {
+                    this.ctx.arc(this.x, this.y, Player.move_radius, this.radius_colision_angles[0], this.radius_colision_angles[1], true);
 
                     this.ctx.strokeStyle = "#000000";
                     this.ctx.lineWidth = 3;
@@ -58,7 +58,7 @@ class Player extends Entity {
 
                     this.ctx.beginPath();
 
-                    this.ctx.arc(this.x, this.y, Player.move_radius, result[2], result[3], true);
+                    this.ctx.arc(this.x, this.y, Player.move_radius, this.radius_colision_angles[2], this.radius_colision_angles[3], true);
 
                     this.ctx.strokeStyle = "#000000";
                     this.ctx.lineWidth = 3;

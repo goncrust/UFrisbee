@@ -36,37 +36,21 @@ class Game {
         // handle mouse clicks
         if (clicked) {
 
-            // select player
-            for (let i = 0; i < this.teams.size; i++) {
+            if (last_clicked[0] > 66 && last_clicked[0] < 733 && last_clicked[1] > 121 && last_clicked[1] < 478) {
 
-                // for blue team
-                if (!this.teams.team_blue[i].selected) {
-                    if (in_radius(this.teams.team_blue[i].getCoords(), Player.player_radius, last_clicked)) {
-
-                        for (let y = 0; y < this.teams.size; y++) {
-                            this.teams.team_blue[y].selected = false;
-                        }
-
-                        this.teams.team_blue[i].selected = true;
-                        selected_new = true;
-                    }
-                }
-
-                // for red team
-                // working...
-            }
-
-            // move player
-            if (!selected_new) {
-
+                // select player
                 for (let i = 0; i < this.teams.size; i++) {
 
                     // for blue team
-                    if (this.teams.team_blue[i].selected) {
-                        if (in_radius_complex(this.teams.team_blue[i].getCoords(), Player.player_radius, Player.move_radius, last_clicked)) {
-                            this.teams.team_blue[i].move(last_clicked[0], last_clicked[1]);
-                            this.teams.team_blue[i].selected = false;
-                            this.teams.team_blue[i].radius_colision_angles = radius_colision_with_field(this.teams.team_blue[i].getCoords(), Player.move_radius, 66, 733, 121, 478);
+                    if (!this.teams.team_blue[i].selected) {
+                        if (in_radius(this.teams.team_blue[i].getCoords(), Player.player_radius, last_clicked)) {
+
+                            for (let y = 0; y < this.teams.size; y++) {
+                                this.teams.team_blue[y].selected = false;
+                            }
+
+                            this.teams.team_blue[i].selected = true;
+                            selected_new = true;
                         }
                     }
 
@@ -74,6 +58,25 @@ class Game {
                     // working...
                 }
 
+                // move player
+                if (!selected_new) {
+
+                    for (let i = 0; i < this.teams.size; i++) {
+
+                        // for blue team
+                        if (this.teams.team_blue[i].selected) {
+                            if (in_radius_complex(this.teams.team_blue[i].getCoords(), Player.player_radius, Player.move_radius, last_clicked)) {
+                                this.teams.team_blue[i].move(last_clicked[0], last_clicked[1]);
+                                this.teams.team_blue[i].selected = false;
+                                this.teams.team_blue[i].radius_colision_angles = radius_colision_with_field(this.teams.team_blue[i].getCoords(), Player.move_radius, 66, 733, 121, 478);
+                            }
+                        }
+
+                        // for red team
+                        // working...
+                    }
+
+                }
             }
 
         }

@@ -61,6 +61,7 @@ Different types of returns:
                                           or two different equations (x = a and y = b) one time (two sides of the field, a corner).
 [number, number, number, number] -> when the circumference colides with two different equations (x = a and y = b) two times,
                                     the first two numbers are the angles for the small semicircumference and the last two are for the bigger one.
+                                    Note: you must create two arc() functions, one for the first two and one for the last two.
 [] -> no collision with boundaries of the field.
 
 The numbers are in counterclockwise order, so the arc() function must take the last argument as true if you use the angles in the order of the returned array.

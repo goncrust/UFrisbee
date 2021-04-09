@@ -139,7 +139,7 @@ function radius_colision_with_field(coords_t, radius, field_x_left, field_x_righ
             if (result_bot[i] < coords_t[0]) {
                 result_angles_bot[1] = Math.PI + Math.asin(co / h);
             } else {
-                result_angles_bot[0] = Math.PI * 2 - Math.asin(co / h);
+                result_angles_bot[0] = -Math.asin(co / h);
             }
         }
 
@@ -149,7 +149,7 @@ function radius_colision_with_field(coords_t, radius, field_x_left, field_x_righ
             let h = radius;
 
             if (result_right[i] < coords_t[1]) {
-                result_angles_right[0] = Math.PI * 2 - Math.asin(co / h);
+                result_angles_right[0] = -Math.asin(co / h);
             } else {
                 result_angles_right[1] = Math.asin(co / h);
             }
@@ -167,15 +167,11 @@ function radius_colision_with_field(coords_t, radius, field_x_left, field_x_righ
         result_angles[1] = result_angles_bot[1];
         result_angles[2] = result_angles_bot[0];
         result_angles[3] = result_angles_left[1];
-
-        // not working
     } else if (verify_all_not_undefined(result_angles_bot, result_angles_right)) {
         result_angles[0] = result_angles_bot[0];
         result_angles[1] = result_angles_right[1];
         result_angles[2] = result_angles_right[0];
         result_angles[3] = result_angles_bot[1];
-
-        // not working
     } else if (verify_all_not_undefined(result_angles_right, result_angles_top)) {
         result_angles[0] = result_angles_right[0];
         result_angles[1] = result_angles_top[1];

@@ -6,14 +6,14 @@ class Player extends Entity {
     static player_radius = 10;
     static move_radius = 170;
 
-    constructor(x = 0, y = 0, visible = true, color, color_selected, ctx) {
+    constructor(x = 0, y = 0, visible = true, color, color_selected, field_boundaries, ctx) {
         super(x, y, visible, ctx);
         this.color = color;
         this.color_selected = color_selected;
 
         this.selected = false;
 
-        this.radius_colision_angles = radius_colision_with_field(this.getCoords(), Player.move_radius, 66, 733, 121, 478);
+        this.radius_colision_angles = radius_colision_with_field(this.getCoords(), Player.move_radius, field_boundaries[0][0], field_boundaries[1][0], field_boundaries[0][1], field_boundaries[1][1]);
     }
 
     render() {

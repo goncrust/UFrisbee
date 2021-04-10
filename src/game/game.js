@@ -4,6 +4,7 @@ import { scenarios } from "../engine/scenario.js";
 import { Player } from "../entities/player.js";
 import { Teams } from "./teams.js";
 import { in_radius, in_radius_complex, radius_colision_with_field } from "../util/util.js";
+import { levels } from "./level.js";
 
 class Game {
 
@@ -11,17 +12,22 @@ class Game {
         this.ctx = ctx;
         this.scenario = scenario;
 
+        this.level = levels["main"];
+
         this.createTeams();
     }
 
+    change_level(level) {
+        this.level = level;
+    }
+
     createTeams() {
-        // [[66, 121], [136, 478]] and [[665, 121], [732, 477]]
-        this.teams = new Teams(5, [[76, 131], [126, 468]], [[675, 131], [722, 467]], this.ctx);
+        this.teams = new Teams(5, this.level.spawn_boundaries[0], this.level.spawn_boundaries[1], this.level.field_boundaries, this.ctx);
     }
 
     render() {
         // field
-        this.ctx.drawImage(iLoader.getAsset("field"), 0, 0, 800, 600);
+        this.ctx.drawImage(iLoader.getAsset(this.level.field_asset_name), 0, 0, 800, 600);
 
         // players
         for (let i = 0; i < this.teams.size; i++) {
@@ -68,7 +74,7 @@ class Game {
                             if (in_radius_complex(this.teams.team_blue[i].getCoords(), Player.player_radius, Player.move_radius, last_clicked)) {
                                 this.teams.team_blue[i].move(last_clicked[0], last_clicked[1]);
                                 this.teams.team_blue[i].selected = false;
-                                this.teams.team_blue[i].radius_colision_angles = radius_colision_with_field(this.teams.team_blue[i].getCoords(), Player.move_radius, 66, 733, 121, 478);
+                                this.teams.team_blue[i].radius_colision_angles = radius_colision_with_field(this.teams.team_blue[i].getCoords(), Player.move_radius, this.level.field_boundaries[0][0], this.level.field_boundaries[1][0], this.level.field_boundaries[0][1], this.level.field_boundaries[1][1]);
                             }
                         }
 

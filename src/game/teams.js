@@ -3,7 +3,7 @@ import { distance } from "../util/util.js";
 
 class Teams {
 
-    constructor(team_player_count = 5, bounds_blue, bounds_red, ctx) {
+    constructor(team_player_count = 5, bounds_blue, bounds_red, field_boundaries, ctx) {
         this.size = team_player_count;
 
         this.team_blue = new Array(team_player_count);
@@ -41,8 +41,8 @@ class Teams {
             // console.log("blue: " + blue_x + ", " + blue_y);
             // console.log("red: " + red_x + ", " + red_y);
 
-            this.team_blue[i] = new Player(blue_x, blue_y, true, "#0000ff", "#ffffff", ctx);
-            this.team_red[i] = new Player(red_x, red_y, true, "#ff0000", "#ffffff", ctx);
+            this.team_blue[i] = new Player(blue_x, blue_y, true, "#0000ff", "#ffffff", field_boundaries, ctx);
+            this.team_red[i] = new Player(red_x, red_y, true, "#ff0000", "#ffffff", field_boundaries, ctx);
         }
     }
 

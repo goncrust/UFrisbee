@@ -19,5 +19,7 @@ let vLoader = new VideoLoader("https://goncrust.github.io/UFrisbee/assets");
 
 // video
 vLoader.load("testVideo", "vidtest.mp4");
+vLoader.load("red_coin", "flip_animation_red.mp4")
+vLoader.load("blue_coin", "flip_animation_blue.mp4")
 
 export { vLoader }

@@ -12,8 +12,8 @@ class ImageLoader extends AssetLoader {
     }
 }
 
-//let iLoader = new ImageLoader("../../assets");
-let iLoader = new ImageLoader("https://goncrust.github.io/UFrisbee/assets");
+let iLoader = new ImageLoader("../../assets");
+//let iLoader = new ImageLoader("https://goncrust.github.io/UFrisbee/assets");
 
 // images
 iLoader.load("field", "field.png");
@@ -23,5 +23,7 @@ iLoader.load("singleplayer", "singleplayer.png");
 iLoader.load("multiplayer", "multiplayer.png");
 iLoader.load("logo", "logo.png");
 iLoader.load("pause", "pause.jpg");
+iLoader.load("blue_coin", "blue_coin.png");
+iLoader.load("red_coin", "red_coin.png");
 
 export { iLoader }

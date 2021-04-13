@@ -4,10 +4,14 @@ import { distance } from "../util/util.js";
 class Teams {
 
     constructor(team_player_count = 5, bounds_blue, bounds_red, field_boundaries, ctx) {
+        this.team_blue_score = 0;
+        this.team_red_score = 0;
+
         this.size = team_player_count;
 
         this.team_blue = new Array(team_player_count);
         this.team_red = new Array(team_player_count);
+
 
         for (let i = 0; i < team_player_count; i++) {
             let done = false;

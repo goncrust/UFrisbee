@@ -44,10 +44,10 @@ class Menu {
         }
     }
 
-    logic(last_clicked, clicked, last_b_clicked, clicked_b, pause) {
+    logic(last_clicked, clicked, last_clicked_was_left, last_b_clicked, clicked_b, pause) {
 
-        // handle mouse clicks
-        if (clicked) {
+        // handle left mouse clicks
+        if (clicked && last_clicked_was_left) {
 
             // main menu
             if (!pause) {

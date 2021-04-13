@@ -14,6 +14,7 @@ let game;
 // clicks
 let last_clicked;
 let clicked;
+let last_clicked_was_left;
 
 let last_b_clicked;
 let clicked_b;
@@ -74,13 +75,13 @@ function logic() {
 
     switch (scenario.getCurrent()) {
         case scenarios.menu:
-            menu.logic(last_clicked, clicked, last_b_clicked, clicked_b, false);
+            menu.logic(last_clicked, clicked, last_clicked_was_left, last_b_clicked, clicked_b, false);
             break;
         case scenarios.game:
-            game.logic(last_clicked, clicked, last_b_clicked, clicked_b);
+            game.logic(last_clicked, clicked, last_clicked_was_left, last_b_clicked, clicked_b);
             break;
         case scenarios.pause:
-            menu.logic(last_clicked, clicked, last_b_clicked, clicked_b, true);
+            menu.logic(last_clicked, clicked, last_clicked_was_left, last_b_clicked, clicked_b, true);
             break;
     }
 
@@ -89,8 +90,9 @@ function logic() {
 }
 
 // last_clicked
-function update_clicked(coords) {
+function update_clicked(coords, left) {
     last_clicked = coords;
+    last_clicked_was_left = left;
     clicked = true;
 }
 

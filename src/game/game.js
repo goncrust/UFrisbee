@@ -95,12 +95,13 @@ class Game {
         }
     }
 
-    logic(last_clicked, clicked, last_b_clicked, clicked_b) {
+    logic(last_clicked, clicked, last_clicked_was_left, last_b_clicked, clicked_b) {
         let selected_new = false;
 
-        // handle mouse clicks
         if (!this.animation) {
-            if (clicked) {
+
+            // handle left mouse clicks
+            if (clicked && last_clicked_was_left) {
 
                 if (last_clicked[0] > 66 && last_clicked[0] < 733 && last_clicked[1] > 121 && last_clicked[1] < 478) {
 
@@ -123,7 +124,6 @@ class Game {
                         }
 
                         // for red team
-                        // working...
                         if (this.team == 1) {
                             if (!this.teams.team_red[i].selected) {
                                 if (in_radius(this.teams.team_red[i].getCoords(), Player.player_radius, last_clicked)) {
@@ -145,16 +145,26 @@ class Game {
                         for (let i = 0; i < this.teams.size; i++) {
 
                             // for blue team
-                            if (this.teams.team_blue[i].selected) {
-                                if (in_radius_complex(this.teams.team_blue[i].getCoords(), Player.player_radius, Player.move_radius, last_clicked)) {
-                                    this.teams.team_blue[i].move(last_clicked[0], last_clicked[1]);
-                                    this.teams.team_blue[i].selected = false;
-                                    this.teams.team_blue[i].radius_colision_angles = radius_colision_with_field(this.teams.team_blue[i].getCoords(), Player.move_radius, this.level.field_boundaries[0][0], this.level.field_boundaries[1][0], this.level.field_boundaries[0][1], this.level.field_boundaries[1][1]);
+                            if (this.team == 0) {
+                                if (this.teams.team_blue[i].selected) {
+                                    if (in_radius_complex(this.teams.team_blue[i].getCoords(), Player.player_radius, Player.move_radius, last_clicked)) {
+                                        this.teams.team_blue[i].move(last_clicked[0], last_clicked[1]);
+                                        this.teams.team_blue[i].selected = false;
+                                        this.teams.team_blue[i].radius_colision_angles = radius_colision_with_field(this.teams.team_blue[i].getCoords(), Player.move_radius, this.level.field_boundaries[0][0], this.level.field_boundaries[1][0], this.level.field_boundaries[0][1], this.level.field_boundaries[1][1]);
+                                    }
                                 }
                             }
 
                             // for red team
-                            // working...
+                            if (this.team == 1) {
+                                if (this.teams.team_red[i].selected) {
+                                    if (in_radius_complex(this.teams.team_red[i].getCoords(), Player.player_radius, Player.move_radius, last_clicked)) {
+                                        this.teams.team_red[i].move(last_clicked[0], last_clicked[1]);
+                                        this.teams.team_red[i].selected = false;
+                                        this.teams.team_red[i].radius_colision_angles = radius_colision_with_field(this.teams.team_red[i].getCoords(), Player.move_radius, this.level.field_boundaries[0][0], this.level.field_boundaries[1][0], this.level.field_boundaries[0][1], this.level.field_boundaries[1][1]);
+                                    }
+                                }
+                            }
                         }
 
                     }

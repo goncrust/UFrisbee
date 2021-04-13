@@ -6,7 +6,16 @@ class EventListener {
         this.canvas = canvas;
 
         this.canvas.addEventListener("mousedown", function (e) {
-            update_clicked(getCursorPosition(e));
+            if (e.which == 1) {
+                update_clicked(getCursorPosition(e), true);
+            } else if (e.which == 3) {
+                update_clicked(getCursorPosition(e), false);
+            }
+        });
+
+        this.canvas.addEventListener("contextmenu", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
         });
 
         window.addEventListener("keydown", function (e) {

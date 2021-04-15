@@ -4,7 +4,7 @@ import { Player } from "./player.js";
 class Frisbee extends Entity {
 
     constructor(visible = true, p_holding, ctx) {
-        super(p_holding.getCoords()[0], p_holding.getCoords()[1], visible, ctx);
+        super(0, 0, visible, ctx);
 
         this.p_holding = p_holding;
     }

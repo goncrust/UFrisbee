@@ -12,8 +12,8 @@ class ImageLoader extends AssetLoader {
     }
 }
 
-let iLoader = new ImageLoader("../../assets");
-//let iLoader = new ImageLoader("https://goncrust.github.io/UFrisbee/assets");
+//let iLoader = new ImageLoader("../../assets");
+let iLoader = new ImageLoader("https://goncrust.github.io/UFrisbee/assets");
 
 // images
 iLoader.load("field", "field.png");

@@ -5,6 +5,7 @@ import { Player } from "../entities/player.js";
 import { Teams } from "./teams.js";
 import { in_radius, in_radius_complex, radius_colision_with_field } from "../util/util.js";
 import { levels } from "./level.js";
+import { Frisbee } from "../entities/frisbee.js";
 
 class Game {
 
@@ -15,11 +16,13 @@ class Game {
         this.level = levels["main"];
         this.createTeams();
         this.pickTeam();
+        this.createFrisbee();
     }
 
     reset() {
         this.level = levels["main"];
         this.createTeams();
+        this.createFrisbee();
     }
 
     pickTeam() {
@@ -42,6 +45,11 @@ class Game {
 
     createTeams() {
         this.teams = new Teams(5, this.level.spawn_boundaries[0], this.level.spawn_boundaries[1], this.level.field_boundaries, this.ctx);
+    }
+
+    createFrisbee() {
+        let rand_player_index = Math.floor(Math.random() * (4 - 0 + 1)) + 0;
+        this.frisbee = new Frisbee(true, this.teams.team_blue[rand_player_index], this.ctx);
     }
 
     render() {
@@ -93,6 +101,9 @@ class Game {
                 this.ctx.drawImage(iLoader.getAsset("red_coin"), 720, 15, 65, 55);
             }
         }
+
+        // frisbee
+        this.frisbee.render();
     }
 
     logic(last_clicked, clicked, last_clicked_was_left, last_b_clicked, clicked_b) {
@@ -147,10 +158,12 @@ class Game {
                             // for blue team
                             if (this.team == 0) {
                                 if (this.teams.team_blue[i].selected) {
-                                    if (in_radius_complex(this.teams.team_blue[i].getCoords(), Player.player_radius, Player.move_radius, last_clicked)) {
-                                        this.teams.team_blue[i].move(last_clicked[0], last_clicked[1]);
-                                        this.teams.team_blue[i].selected = false;
-                                        this.teams.team_blue[i].radius_colision_angles = radius_colision_with_field(this.teams.team_blue[i].getCoords(), Player.move_radius, this.level.field_boundaries[0][0], this.level.field_boundaries[1][0], this.level.field_boundaries[0][1], this.level.field_boundaries[1][1]);
+                                    if (this.frisbee.getPlayer() != this.teams.team_blue[i]) {
+                                        if (in_radius_complex(this.teams.team_blue[i].getCoords(), Player.player_radius, Player.move_radius, last_clicked)) {
+                                            this.teams.team_blue[i].move(last_clicked[0], last_clicked[1]);
+                                            this.teams.team_blue[i].selected = false;
+                                            this.teams.team_blue[i].radius_colision_angles = radius_colision_with_field(this.teams.team_blue[i].getCoords(), Player.move_radius, this.level.field_boundaries[0][0], this.level.field_boundaries[1][0], this.level.field_boundaries[0][1], this.level.field_boundaries[1][1]);
+                                        }
                                     }
                                 }
                             }
@@ -158,10 +171,12 @@ class Game {
                             // for red team
                             if (this.team == 1) {
                                 if (this.teams.team_red[i].selected) {
-                                    if (in_radius_complex(this.teams.team_red[i].getCoords(), Player.player_radius, Player.move_radius, last_clicked)) {
-                                        this.teams.team_red[i].move(last_clicked[0], last_clicked[1]);
-                                        this.teams.team_red[i].selected = false;
-                                        this.teams.team_red[i].radius_colision_angles = radius_colision_with_field(this.teams.team_red[i].getCoords(), Player.move_radius, this.level.field_boundaries[0][0], this.level.field_boundaries[1][0], this.level.field_boundaries[0][1], this.level.field_boundaries[1][1]);
+                                    if (this.frisbee.getPlayer() != this.teams.team_red[i]) {
+                                        if (in_radius_complex(this.teams.team_red[i].getCoords(), Player.player_radius, Player.move_radius, last_clicked)) {
+                                            this.teams.team_red[i].move(last_clicked[0], last_clicked[1]);
+                                            this.teams.team_red[i].selected = false;
+                                            this.teams.team_red[i].radius_colision_angles = radius_colision_with_field(this.teams.team_red[i].getCoords(), Player.move_radius, this.level.field_boundaries[0][0], this.level.field_boundaries[1][0], this.level.field_boundaries[0][1], this.level.field_boundaries[1][1]);
+                                        }
                                     }
                                 }
                             }
@@ -183,6 +198,8 @@ class Game {
             }
 
         }
+
+        this.frisbee.logic();
 
     }
 }

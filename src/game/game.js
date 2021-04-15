@@ -14,9 +14,9 @@ class Game {
         this.scenario = scenario;
 
         this.level = levels["main"];
+        this.createFrisbee();
         this.createTeams();
         this.pickTeam();
-        this.createFrisbee();
     }
 
     reset() {
@@ -44,12 +44,13 @@ class Game {
     }
 
     createTeams() {
-        this.teams = new Teams(5, this.level.spawn_boundaries[0], this.level.spawn_boundaries[1], this.level.field_boundaries, this.ctx);
+        this.teams = new Teams(5, this.level.spawn_boundaries[0], this.level.spawn_boundaries[1], this.level.field_boundaries, this.frisbee, this.ctx);
+        this.frisbee.p_holding = this.teams.team_blue[this.frisbee.p_holding];
     }
 
     createFrisbee() {
         let rand_player_index = Math.floor(Math.random() * (4 - 0 + 1)) + 0;
-        this.frisbee = new Frisbee(true, this.teams.team_blue[rand_player_index], this.ctx);
+        this.frisbee = new Frisbee(true, rand_player_index, this.ctx);
     }
 
     render() {

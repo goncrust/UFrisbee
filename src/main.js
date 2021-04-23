@@ -29,8 +29,8 @@ function init() {
 
     event_listener = new EventListener(canvas);
     scenario = new Scenario(scenarios.menu);
-    menu = new Menu(ctx, scenario);
     game = new Game(ctx, scenario);
+    menu = new Menu(ctx, scenario, game);
 
     clicked = false;
     clicked_b = false;

@@ -21,8 +21,9 @@ class Game {
 
     reset() {
         this.level = levels["main"];
-        this.createTeams();
         this.createFrisbee();
+        this.createTeams();
+        this.pickTeam();
     }
 
     pickTeam() {

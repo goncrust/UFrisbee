@@ -35,12 +35,13 @@ class Menu {
 
         // pause menu
         else {
-            if (this.menu == 0) {
-                if (vLoader.getAsset("testVideo").paused || vLoader.getAsset("testVideo").ended) {
-                    vLoader.getAsset("testVideo").play();
-                }
+            if (vLoader.getAsset("testVideo").paused || vLoader.getAsset("testVideo").ended) {
+                vLoader.getAsset("testVideo").play();
+            }
 
-                this.ctx.drawImage(vLoader.getAsset("testVideo"), 0, 0, 800, 600);
+            this.ctx.drawImage(vLoader.getAsset("testVideo"), 0, 0, 800, 600);
+
+            if (this.menu == 0) {
                 this.ctx.drawImage(iLoader.getAsset("resume"), 300, 175, 200, 50);
                 this.ctx.drawImage(iLoader.getAsset("options"), 300, 275, 200, 50);
                 this.ctx.drawImage(iLoader.getAsset("exit"), 300, 375, 200, 50);

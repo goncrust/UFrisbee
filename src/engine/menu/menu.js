@@ -34,29 +34,21 @@ class Menu {
         }
 
         // pause menu
-        else {            
+        else {
             if (this.menu == 0) {
                 if (vLoader.getAsset("testVideo").paused || vLoader.getAsset("testVideo").ended) {
                     vLoader.getAsset("testVideo").play();
                 }
-                
+
                 this.ctx.drawImage(vLoader.getAsset("testVideo"), 0, 0, 800, 600);
                 this.ctx.drawImage(iLoader.getAsset("resume"), 300, 175, 200, 50);
                 this.ctx.drawImage(iLoader.getAsset("options"), 300, 275, 200, 50);
-                this.ctx.drawImage(iLoader.getAsset("exit"), 300, 375, 200,50);
+                this.ctx.drawImage(iLoader.getAsset("exit"), 300, 375, 200, 50);
 
-                
+
             } else if (this.menu == 1) {
                 this.ctx.drawImage(iLoader.getAsset("arrow_left"), 20, 485, 100, 100);
             }
-            
-            // printWin.document.open();
-            // printWin.document.write(windowContent);
-            // printWin.document.close();
-            // printWin.focus();
-            // printWin.print();
-            // printWin.close();
-
 
         }
     }
@@ -129,7 +121,7 @@ class Menu {
                         this.menu = 0;
                     }
                 }
-                
+
             }
 
 

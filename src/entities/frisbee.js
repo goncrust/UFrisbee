@@ -13,6 +13,10 @@ class Frisbee extends Entity {
         return this.p_holding;
     }
 
+    pass(player) {
+        this.p_holding = player;
+    }
+
     render() {
 
         this.ctx.beginPath();

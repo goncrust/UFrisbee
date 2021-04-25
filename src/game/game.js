@@ -187,6 +187,28 @@ class Game {
                     }
                 }
 
+            } else if (clicked && !last_clicked_was_left) {
+
+                // pass the frisbee
+                // for blue team
+                if (this.team == 0) {
+                    if (this.frisbee.getPlayer().selected) {
+                        for (let i = 0; i < this.teams.size; i++) {
+                            if (this.frisbee.getPlayer() != this.teams.team_blue[i]) {
+                                if (in_radius(this.teams.team_blue[i].getCoords(), Player.player_radius, last_clicked)) {
+                                    this.frisbee.getPlayer().selected = false;
+                                    this.frisbee.pass(this.teams.team_blue[i]);
+                                }
+                            }
+                        }
+                    }
+
+                    // for red team
+                    else if (this.team == 1) {
+                        if (this.frisbee.getPlayer() != this.teams.team_red[i]) {
+                        }
+                    }
+                }
             }
 
             // handle key clicks

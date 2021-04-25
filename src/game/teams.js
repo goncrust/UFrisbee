@@ -3,7 +3,11 @@ import { distance } from "../util/util.js";
 
 class Teams {
 
-    constructor(team_player_count = 5, bounds_blue, bounds_red, field_boundaries, frisbee, ctx) {
+    constructor(team_player_count, bounds_blue, bounds_red, field_boundaries, frisbee, ctx) {
+        if (team_player_count == undefined) {
+            team_player_count = 5;
+        }
+
         this.team_blue_score = 0;
         this.team_red_score = 0;
 

@@ -3,10 +3,19 @@ import { radius_colision_with_field } from "../util/util.js";
 
 class Player extends Entity {
 
-    static player_radius = 10;
-    static move_radius = 170;
+    constructor(x, y, visible, color, color_selected, field_boundaries, frisbee, ctx) {
+        if (x == undefined) {
+            x = 0;
+        }
 
-    constructor(x = 0, y = 0, visible = true, color, color_selected, field_boundaries, frisbee, ctx) {
+        if (y == undefined) {
+            y = 0;
+        }
+
+        if (visible == undefined) {
+            visible = true;
+        }
+
         super(x, y, visible, ctx);
         this.color = color;
         this.color_selected = color_selected;
@@ -85,5 +94,8 @@ class Player extends Entity {
     }
 
 }
+
+Player.player_radius = 10;
+Player.move_radius = 170;
 
 export { Player };

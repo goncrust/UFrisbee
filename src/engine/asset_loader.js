@@ -1,9 +1,9 @@
 class AssetLoader {
 
-    assets = {};
-
     constructor(assetDir) {
         this.assetDir = assetDir;
+
+        this.assets = {};
     }
 
     getAsset(name) {

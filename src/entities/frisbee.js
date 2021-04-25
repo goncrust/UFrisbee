@@ -3,7 +3,12 @@ import { Player } from "./player.js";
 
 class Frisbee extends Entity {
 
-    constructor(visible = true, p_holding, ctx) {
+    constructor(visible, p_holding, ctx) {
+
+        if (visible == undefined) {
+            visible = true;
+        }
+
         super(0, 0, visible, ctx);
 
         this.p_holding = p_holding;

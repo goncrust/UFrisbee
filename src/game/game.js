@@ -218,21 +218,23 @@ class Game {
                     }
                 }
 
-                // handle key clicks
-                if (clicked_b) {
+            }
 
-                    // pause game
-                    if (last_b_clicked == "Escape" || last_b_clicked == "p" || last_b_clicked == "P") {
-                        this.scenario.setCurrent(scenarios.pause);
-                    }
+            // handle key clicks
+            if (clicked_b) {
 
+                // pause game
+                if (last_b_clicked == "Escape" || last_b_clicked == "p" || last_b_clicked == "P") {
+                    this.scenario.setCurrent(scenarios.pause);
                 }
 
             }
 
-            this.frisbee.logic();
-
         }
+
+        this.frisbee.logic();
+
     }
+}
 
 export { Game };

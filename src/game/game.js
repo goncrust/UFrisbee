@@ -205,27 +205,34 @@ class Game {
 
                     // for red team
                     else if (this.team == 1) {
-                        if (this.frisbee.getPlayer() != this.teams.team_red[i]) {
+                        if (this.frisbee.getPlayer().selected) {
+                            for (let i = 0; i < this.teams.size; i++) {
+                                if (this.frisbee.getPlayer() != this.teams.team_red[i]) {
+                                    if (in_radius(this.teams.team_red[i].getCoords(), Player.player_radius, last_clicked)) {
+                                        this.frisbee.getPlayer().selected = false;
+                                        this.frisbee.pass(this.teams.team_red[i]);
+                                    }
+                                }
+                            }
                         }
                     }
                 }
-            }
 
-            // handle key clicks
-            if (clicked_b) {
+                // handle key clicks
+                if (clicked_b) {
 
-                // pause game
-                if (last_b_clicked == "Escape" || last_b_clicked == "p" || last_b_clicked == "P") {
-                    this.scenario.setCurrent(scenarios.pause);
+                    // pause game
+                    if (last_b_clicked == "Escape" || last_b_clicked == "p" || last_b_clicked == "P") {
+                        this.scenario.setCurrent(scenarios.pause);
+                    }
+
                 }
 
             }
 
+            this.frisbee.logic();
+
         }
-
-        this.frisbee.logic();
-
     }
-}
 
 export { Game };

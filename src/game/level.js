@@ -13,8 +13,8 @@ class Level {
 
 }
 
-let spawn_offset = Player.player_radius;
+Level.spawn_offset = Player.player_radius;
 
-levels["main"] = new Level("Main Field", "field", [[66, 121], [733, 478]], [[[66 + spawn_offset, 121 + spawn_offset], [136 - spawn_offset, 478 - spawn_offset]], [[665 + spawn_offset, 121 + spawn_offset], [732 - spawn_offset, 477 - spawn_offset]]]);
+levels["main"] = new Level("Main Field", "field", [[66, 121], [733, 478]], [[[66 + Level.spawn_offset, 121 + Level.spawn_offset], [136 - Level.spawn_offset, 478 - Level.spawn_offset]], [[665 + Level.spawn_offset, 121 + Level.spawn_offset], [732 - Level.spawn_offset, 477 - Level.spawn_offset]]]);
 
-export { levels }
+export { levels, Level }

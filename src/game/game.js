@@ -4,7 +4,7 @@ import { scenarios } from "../engine/scenario.js";
 import { Player } from "../entities/player.js";
 import { Teams } from "./teams.js";
 import { in_radius, in_radius_complex, radius_colision_with_field } from "../util/util.js";
-import { levels } from "./level.js";
+import { levels, Level } from "./level.js";
 import { Frisbee } from "../entities/frisbee.js";
 
 class Game {
@@ -106,6 +106,8 @@ class Game {
 
         // frisbee
         this.frisbee.render();
+
+
     }
 
     logic(last_clicked, clicked, last_clicked_was_left, last_b_clicked, clicked_b) {
@@ -116,43 +118,44 @@ class Game {
             // handle left mouse clicks
             if (clicked && last_clicked_was_left) {
 
-                if (last_clicked[0] > 66 && last_clicked[0] < 733 && last_clicked[1] > 121 && last_clicked[1] < 478) {
 
-                    // select player
-                    for (let i = 0; i < this.teams.size; i++) {
+                // select player
+                for (let i = 0; i < this.teams.size; i++) {
 
-                        // for blue team
-                        if (this.team == 0) {
-                            if (!this.teams.team_blue[i].selected) {
-                                if (in_radius(this.teams.team_blue[i].getCoords(), Player.player_radius, last_clicked)) {
+                    // for blue team
+                    if (this.team == 0) {
+                        if (!this.teams.team_blue[i].selected) {
+                            if (in_radius(this.teams.team_blue[i].getCoords(), Player.player_radius, last_clicked)) {
 
-                                    for (let y = 0; y < this.teams.size; y++) {
-                                        this.teams.team_blue[y].selected = false;
-                                    }
-
-                                    this.teams.team_blue[i].selected = true;
-                                    selected_new = true;
+                                for (let y = 0; y < this.teams.size; y++) {
+                                    this.teams.team_blue[y].selected = false;
                                 }
-                            }
-                        }
 
-                        // for red team
-                        if (this.team == 1) {
-                            if (!this.teams.team_red[i].selected) {
-                                if (in_radius(this.teams.team_red[i].getCoords(), Player.player_radius, last_clicked)) {
-
-                                    for (let y = 0; y < this.teams.size; y++) {
-                                        this.teams.team_red[y].selected = false;
-                                    }
-
-                                    this.teams.team_red[i].selected = true;
-                                    selected_new = true;
-                                }
+                                this.teams.team_blue[i].selected = true;
+                                selected_new = true;
                             }
                         }
                     }
 
-                    // move player
+                    // for red team
+                    if (this.team == 1) {
+                        if (!this.teams.team_red[i].selected) {
+                            if (in_radius(this.teams.team_red[i].getCoords(), Player.player_radius, last_clicked)) {
+
+                                for (let y = 0; y < this.teams.size; y++) {
+                                    this.teams.team_red[y].selected = false;
+                                }
+
+                                this.teams.team_red[i].selected = true;
+                                selected_new = true;
+                            }
+                        }
+                    }
+                }
+
+                // move player
+                if (last_clicked[0] > 66 && last_clicked[0] < 733 && last_clicked[1] > 121 && last_clicked[1] < 478) {
+
                     if (!selected_new) {
 
                         for (let i = 0; i < this.teams.size; i++) {
@@ -233,6 +236,27 @@ class Game {
         }
 
         this.frisbee.logic();
+
+        // update score
+        let p_frisbee_x = this.frisbee.getPlayer().getCoords()[0];
+        let p_frisbee_y = this.frisbee.getPlayer().getCoords()[1];
+
+        for (let i = 0; i < this.teams.size; i++) {
+
+            // check if red scored
+            if (this.frisbee.getPlayer() == this.teams.team_red[i]) {
+                if (p_frisbee_x <= this.level.spawn_boundaries[0][1][0] + Level.spawn_offset && p_frisbee_y <= this.level.spawn_boundaries[0][1][1] + Level.spawn_offset && p_frisbee_x >= this.level.spawn_boundaries[0][0][0] - Level.spawn_offset && p_frisbee_y >= this.level.spawn_boundaries[0][0][1] - Level.spawn_offset) {
+                    console.log("redscored");
+                }
+
+
+                // check if blue scored
+            } else if (this.frisbee.getPlayer() == this.teams.team_blue[i]) {
+                if (p_frisbee_x <= this.level.spawn_boundaries[1][1][0] + Level.spawn_offset && p_frisbee_y <= this.level.spawn_boundaries[1][1][1] + Level.spawn_offset && p_frisbee_x >= this.level.spawn_boundaries[1][0][0] - Level.spawn_offset && p_frisbee_y >= this.level.spawn_boundaries[1][0][1] - Level.spawn_offset) {
+                    console.log("bluescored");
+                }
+            }
+        }
 
     }
 }

@@ -9,8 +9,10 @@ class Frisbee extends Entity {
             visible = true;
         }
 
+
         super(0, 0, visible, ctx);
 
+        this.c_animating = false;
         this.p_holding = p_holding;
     }
 
@@ -19,21 +21,52 @@ class Frisbee extends Entity {
     }
 
     pass(player) {
+
+        this.last_x = this.p_holding.getCoords()[0];
+        this.last_y = this.p_holding.getCoords()[1];
+
+        this.x_animation_distance = (player.getCoords()[0] - this.p_holding.getCoords()[0]) / Frisbee.animation_divisions;
+        this.y_animation_distance = (player.getCoords()[1] - this.p_holding.getCoords()[1]) / Frisbee.animation_divisions;
+
         this.p_holding = player;
+
+        this.c_animating = true;
+        this.c_animation = 0;
     }
 
     render() {
 
-        this.ctx.beginPath();
+        if (!this.c_animating) {
+            this.ctx.beginPath();
 
-        this.ctx.arc(this.x, this.y, Player.player_radius, 0, 2 * Math.PI, true);
+            this.ctx.arc(this.x, this.y, Player.player_radius, 0, 2 * Math.PI, true);
 
-        this.ctx.strokeStyle = "#f542ef";
-        this.ctx.lineWidth = 3;
+            this.ctx.strokeStyle = "#f542ef";
+            this.ctx.lineWidth = 3;
 
-        this.ctx.stroke();
+            this.ctx.stroke();
 
-        this.ctx.closePath();
+            this.ctx.closePath();
+        } else {
+            if (this.c_animation <= Frisbee.animation_divisions) {
+
+                this.ctx.beginPath();
+
+                this.ctx.arc(this.last_x + this.x_animation_distance * this.c_animation, this.last_y + this.y_animation_distance * this.c_animation, Player.player_radius, 0, 2 * Math.PI, true);
+
+                this.ctx.fillStyle = "#f542ef";
+                this.ctx.lineWidth = 3;
+
+                this.ctx.fill();
+
+                this.ctx.closePath();
+
+                this.c_animation += 0.25;
+            } else {
+                this.c_animating = false;
+            }
+        }
+
 
     }
 
@@ -43,5 +76,7 @@ class Frisbee extends Entity {
     }
 
 }
+
+Frisbee.animation_divisions = 10;
 
 export { Frisbee };

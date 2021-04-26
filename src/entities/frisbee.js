@@ -41,7 +41,7 @@ class Frisbee extends Entity {
 
             this.ctx.arc(this.x, this.y, Player.player_radius, 0, 2 * Math.PI, true);
 
-            this.ctx.strokeStyle = "#f542ef";
+            this.ctx.strokeStyle = Frisbee.color;
             this.ctx.lineWidth = 3;
 
             this.ctx.stroke();
@@ -54,7 +54,7 @@ class Frisbee extends Entity {
 
                 this.ctx.arc(this.last_x + this.x_animation_distance * this.c_animation, this.last_y + this.y_animation_distance * this.c_animation, Player.player_radius, 0, 2 * Math.PI, true);
 
-                this.ctx.fillStyle = "#f542ef";
+                this.ctx.fillStyle = Frisbee.color;
                 this.ctx.lineWidth = 3;
 
                 this.ctx.fill();
@@ -78,5 +78,8 @@ class Frisbee extends Entity {
 }
 
 Frisbee.animation_divisions = 10;
+//Frisbee.color = "#f542ef";
+Frisbee.color = "#e5ff00";
+
 
 export { Frisbee };

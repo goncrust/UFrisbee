@@ -141,7 +141,6 @@ class Game {
 
         this.ctx.closePath();
 
-
     }
 
     logic(last_clicked, clicked, last_clicked_was_left, last_b_clicked, clicked_b) {
@@ -151,7 +150,6 @@ class Game {
 
             // handle left mouse clicks
             if (clicked && last_clicked_was_left) {
-
 
                 // select player
                 for (let i = 0; i < this.teams.size; i++) {

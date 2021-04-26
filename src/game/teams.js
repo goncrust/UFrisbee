@@ -46,11 +46,15 @@ class Teams {
             // console.log("blue: " + blue_x + ", " + blue_y);
             // console.log("red: " + red_x + ", " + red_y);
 
-            this.team_blue[i] = new Player(blue_x, blue_y, true, "#0000ff", "#ffffff", field_boundaries, frisbee, ctx);
-            this.team_red[i] = new Player(red_x, red_y, true, "#ba261a", "#ffffff", field_boundaries, frisbee, ctx);
+            this.team_blue[i] = new Player(blue_x, blue_y, true, Teams.blue_team_color, Teams.selected_color, field_boundaries, frisbee, ctx);
+            this.team_red[i] = new Player(red_x, red_y, true, Teams.red_team_color, Teams.selected_color, field_boundaries, frisbee, ctx);
         }
     }
 
 }
+
+Teams.blue_team_color = "#0000ff";
+Teams.red_team_color = "#ba261a";
+Teams.selected_color = "#ffffff";
 
 export { Teams };

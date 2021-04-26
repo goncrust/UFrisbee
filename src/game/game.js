@@ -33,14 +33,16 @@ class Game {
     }
 
     scored(team) {
-        this.createFrisbee();
+        if (!this.frisbee.c_animating) {
+            this.createFrisbee();
 
-        if (team == 0) {
-            this.team_blue_score++;
-            this.createTeams(1);
-        } else if (team == 1) {
-            this.team_red_score++;
-            this.createTeams(0);
+            if (team == 0) {
+                this.team_blue_score++;
+                this.createTeams(1);
+            } else if (team == 1) {
+                this.team_red_score++;
+                this.createTeams(0);
+            }
         }
 
     }

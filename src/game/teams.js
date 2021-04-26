@@ -8,9 +8,6 @@ class Teams {
             team_player_count = 5;
         }
 
-        this.team_blue_score = 0;
-        this.team_red_score = 0;
-
         this.size = team_player_count;
 
         this.team_blue = new Array(team_player_count);

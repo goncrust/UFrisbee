@@ -15,15 +15,34 @@ class Game {
 
         this.level = levels["main"];
         this.createFrisbee();
-        this.createTeams();
+        this.createTeams(0);
         this.pickTeam();
+
+        this.team_blue_score = 0;
+        this.team_red_score = 0;
     }
 
     reset() {
         this.level = levels["main"];
         this.createFrisbee();
-        this.createTeams();
+        this.createTeams(0);
         this.pickTeam();
+
+        this.team_blue_score = 0;
+        this.team_red_score = 0;
+    }
+
+    scored(team) {
+        this.createFrisbee();
+
+        if (team == 0) {
+            this.team_blue_score++;
+            this.createTeams(1);
+        } else if (team == 1) {
+            this.team_red_score++;
+            this.createTeams(0);
+        }
+
     }
 
     pickTeam() {
@@ -44,9 +63,14 @@ class Game {
         this.level = level;
     }
 
-    createTeams() {
+    createTeams(frisbee_team) {
         this.teams = new Teams(5, this.level.spawn_boundaries[0], this.level.spawn_boundaries[1], this.level.field_boundaries, this.frisbee, this.ctx);
-        this.frisbee.p_holding = this.teams.team_blue[this.frisbee.p_holding];
+
+        if (frisbee_team == 0) {
+            this.frisbee.p_holding = this.teams.team_blue[this.frisbee.p_holding];
+        } else if (frisbee_team == 1) {
+            this.frisbee.p_holding = this.teams.team_red[this.frisbee.p_holding];
+        }
     }
 
     createFrisbee() {
@@ -106,6 +130,16 @@ class Game {
 
         // frisbee
         this.frisbee.render();
+
+        // render scoreboard
+        this.ctx.beginPath();
+
+        this.ctx.font = "35px Arial";
+        this.ctx.fillStyle = "#000000";
+        this.ctx.textAline = "center";
+        this.ctx.fillText(this.team_blue_score.toString() + " : " + this.team_red_score.toString(), 370, 87);
+
+        this.ctx.closePath();
 
 
     }
@@ -246,14 +280,14 @@ class Game {
             // check if red scored
             if (this.frisbee.getPlayer() == this.teams.team_red[i]) {
                 if (p_frisbee_x <= this.level.spawn_boundaries[0][1][0] + Level.spawn_offset && p_frisbee_y <= this.level.spawn_boundaries[0][1][1] + Level.spawn_offset && p_frisbee_x >= this.level.spawn_boundaries[0][0][0] - Level.spawn_offset && p_frisbee_y >= this.level.spawn_boundaries[0][0][1] - Level.spawn_offset) {
-                    console.log("redscored");
+                    this.scored(1)
                 }
 
 
                 // check if blue scored
             } else if (this.frisbee.getPlayer() == this.teams.team_blue[i]) {
                 if (p_frisbee_x <= this.level.spawn_boundaries[1][1][0] + Level.spawn_offset && p_frisbee_y <= this.level.spawn_boundaries[1][1][1] + Level.spawn_offset && p_frisbee_x >= this.level.spawn_boundaries[1][0][0] - Level.spawn_offset && p_frisbee_y >= this.level.spawn_boundaries[1][0][1] - Level.spawn_offset) {
-                    console.log("bluescored");
+                    this.scored(0)
                 }
             }
         }

@@ -143,6 +143,16 @@ class Game {
 
         this.ctx.closePath();
 
+        // render team moves
+        this.ctx.beginPath();
+
+        this.ctx.font = "35px Arial";
+        this.ctx.fillStyle = "#000000";
+        this.ctx.textAline = "center";
+        this.ctx.fillText(this.team_blue_score.toString() + " : " + this.team_red_score.toString(), 370, 87);
+
+        this.ctx.closePath();
+
     }
 
     logic(last_clicked, clicked, last_clicked_was_left, last_b_clicked, clicked_b) {

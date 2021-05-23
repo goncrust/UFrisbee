@@ -23,11 +23,13 @@ class Menu {
 
             this.ctx.drawImage(vLoader.getAsset("testVideo"), 0, 0, 800, 600);
 
+            // main menu
             if (this.menu == 0) {
                 this.ctx.drawImage(iLoader.getAsset("options"), 550, 485, 200, 50);
                 this.ctx.drawImage(iLoader.getAsset("singleplayer"), 50, 485, 200, 50);
                 this.ctx.drawImage(iLoader.getAsset("multiplayer"), 300, 485, 200, 50);
                 this.ctx.drawImage(iLoader.getAsset("logo"), 70, 50);
+                // main menu options
             } else if (this.menu == 1) {
                 this.ctx.drawImage(iLoader.getAsset("arrow_left"), 20, 485, 100, 100);
             }
@@ -41,12 +43,13 @@ class Menu {
 
             this.ctx.drawImage(vLoader.getAsset("testVideo"), 0, 0, 800, 600);
 
+            // pause menu
             if (this.menu == 0) {
                 this.ctx.drawImage(iLoader.getAsset("resume"), 300, 175, 200, 50);
                 this.ctx.drawImage(iLoader.getAsset("options"), 300, 275, 200, 50);
                 this.ctx.drawImage(iLoader.getAsset("exit"), 300, 375, 200, 50);
 
-
+                // pause menu options
             } else if (this.menu == 1) {
                 this.ctx.drawImage(iLoader.getAsset("arrow_left"), 20, 485, 100, 100);
             }

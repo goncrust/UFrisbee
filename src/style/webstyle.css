@@ -2,3 +2,8 @@
     outline: 4px black solid;
     margin-left: 25%;
 }
+
+@font-face {
+    font-family: 'SegaFont';
+    src: 'https://goncrust.github.io/UFrisbee/assets/fonts/SEGA.TTF'
+}

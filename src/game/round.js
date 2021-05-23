@@ -22,20 +22,46 @@ class Round {
     movement() {
         this.moves--;
 
+        if (this.movement_sequence == 2 && this.moves == 1) {
+            this.move_type = 1;
+        } else {
+            this.move_type = 0;
+        }
+
         if (this.moves == 0) {
             this.movement_sequence++;
 
-            if (this.movement_sequence == 2) {
-                if (this.current_team == 0) this.current_team = 1;
-                else this.current_team = 0;
+            if (this.movement_sequence != 3)
+                this.current_team = !this.current_team;
 
+            if (this.movement_sequence == 1) {
                 this.moves = 5;
+            } else if (this.movement_sequence == 2) {
+                this.moves = 2;
+            } else if (this.movement_sequence == 3) {
+                this.reset();
             }
         }
+    }
+
+    reset() {
+        this.movement_sequence = 0;
+        this.moves = 3;
+        this.move_type = 0;
     }
 
     getCurrentTeam() {
         return this.current_team;
     }
 
+    getMoveType() {
+        return this.move_type;
+    }
+
+    getMoves() {
+        return this.moves;
+    }
+
 }
+
+export { Round };

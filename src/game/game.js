@@ -6,6 +6,7 @@ import { Teams } from "./teams.js";
 import { in_radius, in_radius_complex, radius_colision_with_field } from "../util/util.js";
 import { levels, Level } from "./level.js";
 import { Frisbee } from "../entities/frisbee.js";
+import { Round } from "./round.js";
 
 class Game {
 
@@ -15,8 +16,9 @@ class Game {
 
         this.level = levels["main"];
         this.createFrisbee();
-        this.createTeams(0);
         this.pickTeam();
+        this.createTeams(this.team);
+        this.round_manager = new Round(this.team);
 
         this.team_blue_score = 0;
         this.team_red_score = 0;
@@ -24,8 +26,8 @@ class Game {
 
     reset() {
         this.level = levels["main"];
-        this.createFrisbee();
-        this.createTeams(0);
+        this.createTeams();
+        this.createFrisbee(this.team);
         this.pickTeam();
 
         this.team_blue_score = 0;
@@ -39,9 +41,13 @@ class Game {
             if (team == 0) {
                 this.team_blue_score++;
                 this.createTeams(1);
+                this.team = 1;
+                this.round_manager = new Round(this.team);
             } else if (team == 1) {
                 this.team_red_score++;
                 this.createTeams(0);
+                this.team = 0;
+                this.round_manager = new Round(this.team);
             }
         }
 
@@ -131,27 +137,42 @@ class Game {
         }
 
         // frisbee
-        this.frisbee.render();
+        if (!this.animation) {
+            this.frisbee.render();
+        }
 
         // render scoreboard
         this.ctx.beginPath();
 
-        this.ctx.font = "35px Arial";
+        this.ctx.font = "35px SegaFont";
         this.ctx.fillStyle = "#000000";
         this.ctx.textAline = "center";
-        this.ctx.fillText(this.team_blue_score.toString() + " : " + this.team_red_score.toString(), 370, 87);
+        this.ctx.fillText(this.team_blue_score.toString() + " : " + this.team_red_score.toString(), 372, 87);
 
         this.ctx.closePath();
 
         // render team moves
-        this.ctx.beginPath();
+        if (!this.animation) {
+            this.ctx.beginPath();
 
-        this.ctx.font = "35px Arial";
-        this.ctx.fillStyle = "#000000";
-        this.ctx.textAline = "center";
-        this.ctx.fillText(this.team_blue_score.toString() + " : " + this.team_red_score.toString(), 370, 87);
+            if (this.team == 0) {
+                this.ctx.fillStyle = "#0000ff";
+            } else if (this.team == 1) {
+                this.ctx.fillStyle = "#ba261a"
+            }
+            this.ctx.textAline = "center";
 
-        this.ctx.closePath();
+            if (this.round_manager.getMoveType() == 0) {
+                this.ctx.font = "35px SegaFont";
+                this.ctx.fillText(this.round_manager.getMoves(), 394, 537);
+            } else if (this.round_manager.getMoveType() == 1) {
+                this.ctx.font = "24px SegaFont";
+                this.ctx.fillText("Pass Frisbee!", 338, 533);
+            }
+
+            this.ctx.closePath();
+
+        }
 
     }
 
@@ -200,7 +221,7 @@ class Game {
                 // move player
                 if (last_clicked[0] > 66 && last_clicked[0] < 733 && last_clicked[1] > 121 && last_clicked[1] < 478) {
 
-                    if (!selected_new) {
+                    if (!selected_new && this.round_manager.getMoveType() == 0) {
 
                         for (let i = 0; i < this.teams.size; i++) {
 
@@ -212,6 +233,7 @@ class Game {
                                             this.teams.team_blue[i].move(last_clicked[0], last_clicked[1]);
                                             this.teams.team_blue[i].selected = false;
                                             this.teams.team_blue[i].radius_colision_angles = radius_colision_with_field(this.teams.team_blue[i].getCoords(), Player.move_radius, this.level.field_boundaries[0][0], this.level.field_boundaries[1][0], this.level.field_boundaries[0][1], this.level.field_boundaries[1][1]);
+                                            this.round_manager.movement();
                                         }
                                     }
                                 }
@@ -225,6 +247,7 @@ class Game {
                                             this.teams.team_red[i].move(last_clicked[0], last_clicked[1]);
                                             this.teams.team_red[i].selected = false;
                                             this.teams.team_red[i].radius_colision_angles = radius_colision_with_field(this.teams.team_red[i].getCoords(), Player.move_radius, this.level.field_boundaries[0][0], this.level.field_boundaries[1][0], this.level.field_boundaries[0][1], this.level.field_boundaries[1][1]);
+                                            this.round_manager.movement();
                                         }
                                     }
                                 }
@@ -237,14 +260,18 @@ class Game {
             } else if (clicked && !last_clicked_was_left) {
 
                 // pass the frisbee
-                // for blue team
-                if (this.team == 0) {
-                    if (this.frisbee.getPlayer().selected) {
-                        for (let i = 0; i < this.teams.size; i++) {
-                            if (this.frisbee.getPlayer() != this.teams.team_blue[i]) {
-                                if (in_radius(this.teams.team_blue[i].getCoords(), Player.player_radius, last_clicked)) {
-                                    this.frisbee.getPlayer().selected = false;
-                                    this.frisbee.pass(this.teams.team_blue[i]);
+
+                if (this.round_manager.getMoveType() == 1) {
+                    // for blue team
+                    if (this.team == 0) {
+                        if (this.frisbee.getPlayer().selected) {
+                            for (let i = 0; i < this.teams.size; i++) {
+                                if (this.frisbee.getPlayer() != this.teams.team_blue[i]) {
+                                    if (in_radius(this.teams.team_blue[i].getCoords(), Player.player_radius, last_clicked)) {
+                                        this.frisbee.getPlayer().selected = false;
+                                        this.frisbee.pass(this.teams.team_blue[i]);
+                                        this.round_manager.movement();
+                                    }
                                 }
                             }
                         }
@@ -258,12 +285,15 @@ class Game {
                                     if (in_radius(this.teams.team_red[i].getCoords(), Player.player_radius, last_clicked)) {
                                         this.frisbee.getPlayer().selected = false;
                                         this.frisbee.pass(this.teams.team_red[i]);
+                                        this.round_manager.movement();
                                     }
                                 }
                             }
                         }
                     }
+
                 }
+
 
             }
 
@@ -290,17 +320,19 @@ class Game {
             // check if red scored
             if (this.frisbee.getPlayer() == this.teams.team_red[i]) {
                 if (p_frisbee_x <= this.level.spawn_boundaries[0][1][0] + Level.spawn_offset && p_frisbee_y <= this.level.spawn_boundaries[0][1][1] + Level.spawn_offset && p_frisbee_x >= this.level.spawn_boundaries[0][0][0] - Level.spawn_offset && p_frisbee_y >= this.level.spawn_boundaries[0][0][1] - Level.spawn_offset) {
-                    this.scored(1)
+                    this.scored(1);
                 }
 
 
                 // check if blue scored
             } else if (this.frisbee.getPlayer() == this.teams.team_blue[i]) {
                 if (p_frisbee_x <= this.level.spawn_boundaries[1][1][0] + Level.spawn_offset && p_frisbee_y <= this.level.spawn_boundaries[1][1][1] + Level.spawn_offset && p_frisbee_x >= this.level.spawn_boundaries[1][0][0] - Level.spawn_offset && p_frisbee_y >= this.level.spawn_boundaries[1][0][1] - Level.spawn_offset) {
-                    this.scored(0)
+                    this.scored(0);
                 }
             }
         }
+
+        this.team = this.round_manager.getCurrentTeam();
 
     }
 }

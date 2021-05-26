@@ -50,6 +50,13 @@ class Round {
         this.move_type = 0;
     }
 
+    reset_wteam(team) {
+        this.current_team = team;
+        this.movement_sequence = 0;
+        this.moves = 3;
+        this.move_type = 0;
+    }
+
     getCurrentTeam() {
         return this.current_team;
     }

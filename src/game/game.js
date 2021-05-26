@@ -19,6 +19,8 @@ class Game {
         this.pickTeam();
         this.createTeams(this.team);
         this.round_manager = new Round(this.team);
+        this.frisbee.teams = this.teams;
+        this.frisbee.round_manager = this.round_manager;
 
         this.team_blue_score = 0;
         this.team_red_score = 0;
@@ -269,7 +271,7 @@ class Game {
                                 if (this.frisbee.getPlayer() != this.teams.team_blue[i]) {
                                     if (in_radius(this.teams.team_blue[i].getCoords(), Player.player_radius, last_clicked)) {
                                         this.frisbee.getPlayer().selected = false;
-                                        this.frisbee.pass(this.teams.team_blue[i]);
+                                        this.frisbee.pass(this.teams.team_blue[i], this.team);
                                         this.round_manager.movement();
                                     }
                                 }
@@ -284,7 +286,7 @@ class Game {
                                 if (this.frisbee.getPlayer() != this.teams.team_red[i]) {
                                     if (in_radius(this.teams.team_red[i].getCoords(), Player.player_radius, last_clicked)) {
                                         this.frisbee.getPlayer().selected = false;
-                                        this.frisbee.pass(this.teams.team_red[i]);
+                                        this.frisbee.pass(this.teams.team_red[i], this.team);
                                         this.round_manager.movement();
                                     }
                                 }

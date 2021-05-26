@@ -12,6 +12,8 @@ class Frisbee extends Entity {
 
         super(0, 0, visible, ctx);
 
+        this.intersepted = 0;
+
         this.c_animating = false;
         this.p_holding = p_holding;
     }
@@ -67,6 +69,8 @@ class Frisbee extends Entity {
                                     this.p_holding = this.teams.team_red[i];
                                     this.c_animating = false;
                                     this.round_manager.reset_wteam(1);
+                                    this.intersepted = 150;
+                                    this.i_coords = this.teams.team_red[i].getCoords();
                                 }
                             }
                         } else if (this.last_team == 1) {
@@ -78,6 +82,8 @@ class Frisbee extends Entity {
                                     this.p_holding = this.teams.team_blue[i];
                                     this.c_animating = false;
                                     this.round_manager.reset_wteam(0);
+                                    this.intersepted = 150;
+                                    this.i_coords = this.teams.team_blue[i].getCoords();
                                 }
                             }
                         }
@@ -101,6 +107,19 @@ class Frisbee extends Entity {
             }
         }
 
+        if (this.intersepted != 0) {
+            console.log(this.intersepted);
+            this.intersepted -= 1;
+
+            this.ctx.beginPath();
+
+            this.ctx.font = "16px SegaFont";
+            this.ctx.fillStyle = "#000000";
+            this.ctx.textAline = "center";
+            this.ctx.fillText("INTERCEPTED", this.i_coords[0] - 50, this.i_coords[1]);
+
+            this.ctx.closePath();
+        }
 
     }
 

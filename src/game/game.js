@@ -28,9 +28,12 @@ class Game {
 
     reset() {
         this.level = levels["main"];
-        this.createTeams();
-        this.createFrisbee(this.team);
+        this.createFrisbee();
         this.pickTeam();
+        this.createTeams(this.team);
+        this.round_manager = new Round(this.team);
+        this.frisbee.teams = this.teams;
+        this.frisbee.round_manager = this.round_manager;
 
         this.team_blue_score = 0;
         this.team_red_score = 0;

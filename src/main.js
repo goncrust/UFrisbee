@@ -3,6 +3,8 @@ import { Menu } from "./engine/menu/menu.js";
 import { EventListener } from "./engine/event_listener.js";
 import { scenarios, Scenario } from "./engine/scenario.js";
 import { Game } from "./game/game.js";
+import { vLoader } from "./engine/video_loader.js";
+import { iLoader } from "./engine/image_loader.js";
 
 let canvas;
 let ctx;
@@ -57,8 +59,24 @@ function render() {
         case scenarios.menu:
             menu.render(false);
             break;
-        case scenarios.game:
+        case scenarios.game_lmp:
             game.render();
+            break;
+        case scenarios.game_sp:
+            if (vLoader.getAsset("testVideo").paused || vLoader.getAsset("testVideo").ended) {
+                vLoader.getAsset("testVideo").play();
+            }
+
+            ctx.drawImage(vLoader.getAsset("testVideo"), 0, 0, 800, 600);
+            ctx.drawImage(iLoader.getAsset("back"), 300, 500, 200, 50);
+
+            ctx.beginPath();
+
+            ctx.fillStyle = "#ffffff";
+            ctx.font = "32px SegaFont";
+            ctx.fillText("Not Available Yet!", 275, 400);
+
+            ctx.closePath();
             break;
         case scenarios.pause:
             menu.render(true);
@@ -77,8 +95,15 @@ function logic() {
         case scenarios.menu:
             menu.logic(last_clicked, clicked, last_clicked_was_left, last_b_clicked, clicked_b, false);
             break;
-        case scenarios.game:
+        case scenarios.game_lmp:
             game.logic(last_clicked, clicked, last_clicked_was_left, last_b_clicked, clicked_b);
+            break;
+        case scenarios.game_sp:
+            if (clicked && last_clicked_was_left) {
+                if (last_clicked[0] > 300 && last_clicked[0] < 500 && last_clicked[1] > 500 && last_clicked[1] < 550) {
+                    scenario.setCurrent(scenarios.menu);
+                }
+            }
             break;
         case scenarios.pause:
             menu.logic(last_clicked, clicked, last_clicked_was_left, last_b_clicked, clicked_b, true);

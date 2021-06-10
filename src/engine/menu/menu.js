@@ -31,7 +31,7 @@ class Menu {
                 this.ctx.drawImage(iLoader.getAsset("logo"), 70, 50);
                 // main menu options
             } else if (this.menu == 1) {
-                this.ctx.drawImage(iLoader.getAsset("arrow_left"), 20, 485, 100, 100);
+                this.ctx.drawImage(iLoader.getAsset("back"), 300, 375, 200, 50);
             }
         }
 
@@ -51,7 +51,7 @@ class Menu {
 
                 // pause menu options
             } else if (this.menu == 1) {
-                this.ctx.drawImage(iLoader.getAsset("arrow_left"), 20, 485, 100, 100);
+                this.ctx.drawImage(iLoader.getAsset("back"), 300, 375, 200, 50);
             }
 
         }
@@ -75,20 +75,20 @@ class Menu {
                     // single-player
                     else if (last_clicked[0] > 50 && last_clicked[0] < 250 && last_clicked[1] > 485 && last_clicked[1] < 535) {
                         this.menu = 0;
-                        this.scenario.setCurrent(scenarios.game);
+                        this.scenario.setCurrent(scenarios.game_sp);
                     }
 
                     // multi-player
                     else if (last_clicked[0] > 300 && last_clicked[0] < 500 && last_clicked[1] > 485 && last_clicked[1] < 535) {
                         this.menu = 0;
-                        this.scenario.setCurrent(scenarios.game);
+                        this.scenario.setCurrent(scenarios.game_lmp);
                     }
 
                     // options menu
                 } else if (this.menu == 1) {
 
                     // back
-                    if (last_clicked[0] > 20 && last_clicked[0] < 120 && last_clicked[1] > 485 && last_clicked[1] < 585) {
+                    if (last_clicked[0] > 300 && last_clicked[0] < 500 && last_clicked[1] > 375 && last_clicked[1] < 425) {
                         this.menu = 0;
                     }
                 }
@@ -107,7 +107,7 @@ class Menu {
                     // resume button
                     else if (last_clicked[0] > 300 && last_clicked[0] < 500 && last_clicked[1] > 175 && last_clicked[1] < 225) {
                         this.menu = 0;
-                        this.scenario.setCurrent(scenarios.game);
+                        this.scenario.setCurrent(scenarios.game_lmp);
                     }
 
                     // exit button
@@ -121,7 +121,7 @@ class Menu {
                 } else if (this.menu == 1) {
 
                     // back
-                    if (last_clicked[0] > 20 && last_clicked[0] < 120 && last_clicked[1] > 485 && last_clicked[1] < 585) {
+                    if (last_clicked[0] > 300 && last_clicked[0] < 500 && last_clicked[1] > 375 && last_clicked[1] < 425) {
                         this.menu = 0;
                     }
                 }
@@ -144,7 +144,7 @@ class Menu {
 
                 if (last_b_clicked == "Escape" || last_b_clicked == "p" || last_b_clicked == "P") {
                     this.menu = 0;
-                    this.scenario.setCurrent(scenarios.game);
+                    this.scenario.setCurrent(scenarios.game_lmp);
                 }
 
             }

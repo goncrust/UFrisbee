@@ -20,12 +20,14 @@ iLoader.load("field", "field.png");
 iLoader.load("options", "options_button.png");
 iLoader.load("arrow_left", "arrow_left.png");
 iLoader.load("singleplayer", "singleplayer.png");
-iLoader.load("multiplayer", "multiplayer.png");
+//iLoader.load("multiplayer", "multiplayer.png");
+iLoader.load("multiplayer", "lmultiplayer.png");
 iLoader.load("logo", "logo.png");
 iLoader.load("pause", "pause.jpg");
 iLoader.load("blue_coin", "blue_coin.png");
 iLoader.load("red_coin", "red_coin.png");
 iLoader.load("resume", "resume_button.png");
+iLoader.load("back", "back_button.png");
 iLoader.load("exit", "exit_button.png");
 
 export { iLoader }

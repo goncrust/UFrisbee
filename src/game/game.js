@@ -104,15 +104,11 @@ class Game {
 
         // coin flip animation
         if (this.animation) {
+            console.log("oi");
             if (this.team == 0) {
 
                 if (vLoader.getAsset("blue_coin").ended) {
                     this.animation = false;
-                    vLoader.getAsset("blue_coin").play();
-                }
-
-                if (vLoader.getAsset("blue_coin").paused) {
-                    vLoader.getAsset("blue_coin").play();
                 }
 
                 this.ctx.drawImage(vLoader.getAsset("blue_coin"), 720, 15, 65, 55);
@@ -121,11 +117,6 @@ class Game {
 
                 if (vLoader.getAsset("red_coin").ended) {
                     this.animation = false;
-                    vLoader.getAsset("red_coin").play();
-                }
-
-                if (vLoader.getAsset("red_coin").paused) {
-                    vLoader.getAsset("red_coin").play();
                 }
 
                 this.ctx.drawImage(vLoader.getAsset("red_coin"), 720, 15, 65, 55);

@@ -21,6 +21,9 @@ let last_clicked_was_left;
 let last_b_clicked;
 let clicked_b;
 
+// sound
+let mute;
+
 document.onload = init();
 
 // initial function
@@ -36,6 +39,8 @@ function init() {
 
     clicked = false;
     clicked_b = false;
+
+    mute = 0;
 
     window.requestAnimationFrame(mainloop);
 }
@@ -127,4 +132,8 @@ function update_b_clicked(button) {
     clicked_b = true;
 }
 
-export { update_clicked, update_b_clicked };
+function change_mute_state() {
+    mute = !mute;
+}
+
+export { update_clicked, update_b_clicked, change_mute_state, mute };

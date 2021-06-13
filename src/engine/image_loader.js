@@ -30,6 +30,6 @@ iLoader.load("resume", "resume_button.png");
 iLoader.load("back", "back_button.png");
 iLoader.load("exit", "exit_button.png");
 iLoader.load("mute", "mute_button.png");
-iLoader.load("umute", "unmute_button.png");
+iLoader.load("unmute", "unmute_button.png");
 
 export { iLoader }

@@ -61,7 +61,7 @@ class Frisbee extends Entity {
                 if (!this.tested_intersect) {
                     for (let i = 0; i < this.teams.size; i++) {
                         if (this.last_team == 0) {
-                            if (in_radius([temp_x, temp_y], 20, this.teams.team_red[i].getCoords())) {
+                            if (in_radius([temp_x, temp_y], 5, this.teams.team_red[i].getCoords())) {
                                 this.tested_intersect = true;
                                 let rand = Math.random();
                                 console.log(rand);
@@ -74,7 +74,7 @@ class Frisbee extends Entity {
                                 }
                             }
                         } else if (this.last_team == 1) {
-                            if (in_radius([temp_x, temp_y], 20, this.teams.team_blue[i].getCoords())) {
+                            if (in_radius([temp_x, temp_y], 5, this.teams.team_blue[i].getCoords())) {
                                 this.tested_intersect = true;
                                 let rand = Math.random();
                                 console.log(rand);

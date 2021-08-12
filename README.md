@@ -5,7 +5,7 @@ Multiplayer browser game inspired by the sport [Ultime Firsbee](https://en.wikip
 ## List of contents
 
 1. [Info](#Info)
-1. [How to play](#How-to-pay)
+1. [How to play](#How-to-play)
 1. [Controls](#Controls)
 1. [Play](#Play)
 

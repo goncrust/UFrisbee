@@ -1,6 +1,6 @@
 # UFrisbee
 
-Multiplayer browser game inspired by the sport [Ultime Firsbee](https://en.wikipedia.org/wiki/Ultimate_(sport)).
+Multiplayer browser game inspired by the sport [Ultimate Firsbee](https://en.wikipedia.org/wiki/Ultimate_(sport)).
 
 ## List of contents
 

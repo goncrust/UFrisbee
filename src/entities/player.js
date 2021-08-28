@@ -1,3 +1,13 @@
+/*
+UFrisbee (https://github.com/goncrust/UFrisbee)
+
+Entity player.
+
+Copyright (c) 2021 by goncrust
+Released under the GPL v3.0
+https://github.com/goncrust/UFrisbee/blob/main/LICENSE
+*/
+
 import { Entity } from "./entity.js";
 import { radius_colision_with_field } from "../util/util.js";
 

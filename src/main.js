@@ -1,3 +1,11 @@
+/*
+UFrisbee (https://github.com/goncrust/UFrisbee)
+
+Copyright (c) 2021 by goncrust and contributors
+Released under the GPL v3.0
+https://github.com/goncrust/UFrisbee/blob/main/LICENSE
+*/
+
 import { display_fps } from "./engine/engine.js";
 import { Menu } from "./engine/menu/menu.js";
 import { EventListener } from "./engine/event_listener.js";

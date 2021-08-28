@@ -1,4 +1,14 @@
-import { AssetLoader } from "./asset_loader.js"
+/*
+UFrisbee (https://github.com/goncrust/UFrisbee)
+
+Image loader class and actual image loading.
+
+Copyright (c) 2021 by goncrust and contributors
+Released under the GPL v3.0
+https://github.com/goncrust/UFrisbee/blob/main/LICENSE
+*/
+
+import { AssetLoader } from "./asset_loader.js";
 
 class ImageLoader extends AssetLoader {
 

@@ -1,3 +1,13 @@
+/*
+UFrisbee (https://github.com/goncrust/UFrisbee)
+
+Teams class.
+
+Copyright (c) 2021 by goncrust
+Released under the GPL v3.0
+https://github.com/goncrust/UFrisbee/blob/main/LICENSE
+*/
+
 import { Player } from "../entities/player.js";
 import { distance } from "../util/util.js";
 

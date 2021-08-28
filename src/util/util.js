@@ -1,3 +1,14 @@
+/*
+UFrisbee (https://github.com/goncrust/UFrisbee)
+
+Useful geometry functions for 2d games.
+
+Copyright (c) 2021 by goncrust
+Released under the GPL v3.0
+https://github.com/goncrust/UFrisbee/blob/main/LICENSE
+*/
+
+
 
 /*
 Determine the distance between two points.
@@ -10,7 +21,7 @@ function distance(coords1, coords2) {
     return result;
 }
 
-/* 
+/*
 Verify if a point is inside a circumference.
 
 (x - xc)^2 + (y - yc)^2 = r^2

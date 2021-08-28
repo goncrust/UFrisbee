@@ -1,3 +1,13 @@
+/*
+UFrisbee (https://github.com/goncrust/UFrisbee)
+
+Main game class.
+
+Copyright (c) 2021 by goncrust
+Released under the GPL v3.0
+https://github.com/goncrust/UFrisbee/blob/main/LICENSE
+*/
+
 import { vLoader } from "../engine/video_loader.js";
 import { iLoader } from "../engine/image_loader.js";
 import { scenarios } from "../engine/scenario.js";

@@ -1,3 +1,13 @@
+/*
+UFrisbee (https://github.com/goncrust/UFrisbee)
+
+Menu.
+
+Copyright (c) 2021 by goncrust and contributors
+Released under the GPL v3.0
+https://github.com/goncrust/UFrisbee/blob/main/LICENSE
+*/
+
 import { vLoader } from "../video_loader.js";
 import { iLoader } from "../image_loader.js";
 import { scenarios } from "../scenario.js";

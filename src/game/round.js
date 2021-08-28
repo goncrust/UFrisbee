@@ -1,4 +1,16 @@
 /*
+UFrisbee (https://github.com/goncrust/UFrisbee)
+
+Round state tracker.
+
+Copyright (c) 2021 by goncrust
+Released under the GPL v3.0
+https://github.com/goncrust/UFrisbee/blob/main/LICENSE
+*/
+
+
+
+/*
 round:
 0 team with disk -> 3 movements
 1 team defending -> 5 movements

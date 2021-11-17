@@ -35,3 +35,6 @@ Currently only local multiplayer game is available. Online multiplayer and singl
 ## Play
 
 - Just open [this link](https://goncrust.github.io/UFrisbee/).
+
+
+Special thanks to Prof. Marta Gomes
